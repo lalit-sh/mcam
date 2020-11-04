@@ -40,11 +40,16 @@ export const createTrip = (tripName) => (dispatch, getState) =>  {
     dispatch(started());
     service.createTrip(tripName, getToken(getState))
     .then(resp => {
-        if(resp && resp.data){
-            setActiveTrip(tripname);
-            getTrips();
+        console.log("resp", resp)
+        if(resp && resp.data && !resp.data.message){
+            getTrips()(dispatch, getState)
         }else{
-            dispatch(failure(resp.data.message));
+            let message = resp.data.message;
+            console.log(message, message && message.includes("duplicate key error collection"))
+            if(message && message.includes("duplicate key error collection")){
+                message = `Trip "${tripName}" already exsit.`
+            }
+            dispatch(failure(message));
         }
     })
     .catch(err => {
@@ -57,7 +62,7 @@ export const updateTrip = (tripName, data) => (dispatch, getState) => {
     service.updateTrip(tripName, data, getToken(getState))
     .then(resp => {
         if(resp && resp.data){
-            getTrips();
+            getTrips()(dispatch, getState);;
         }else{
             dispatch(failure(resp.data.message));
         }
@@ -88,7 +93,7 @@ export const deleteTrip = (trips = []) => (dispatch, getState) => {
     service.deleteTrip(trips, getToken(getState))
     .then(resp => {
         if(resp && resp.data){
-            getTrips();
+            getTrips()(dispatch, getState);;
         }else{
             dispatch(failure(resp.data.message));
         }

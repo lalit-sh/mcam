@@ -76,7 +76,6 @@ class Home extends Component {
     if(!this.activeTrip){
         return this.noActiveTripDialog();
     }
-    console.log("image captured");
     const filename = getFileName();
     const storagePath = getAppStoragePath(this.activeTrip.name);
     
