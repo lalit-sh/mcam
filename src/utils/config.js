@@ -1,4 +1,4 @@
-export const SERVER_URL = "http://192.168.29.155:9000";
+export const SERVER_URL = "http://3.14.244.151";
 export const API_URL = `${SERVER_URL}/api/v1/`;
 export const S3_ACCESS_KEY_ID = "AKIA5JWWGPAKUGUIBR2R";
 export const S3_SECRET_ACCESS_KEY = "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";
