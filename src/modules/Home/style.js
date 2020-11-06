@@ -1,10 +1,12 @@
 import { StyleSheet } from "react-native";
+// import { Dimensions } from 'react-native'
 
 export const cameraStyle = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'transparent',
+    backgroundColor: '#000',
+    justifyContent: 'center',
   },
   preview: {
     flex: 1,

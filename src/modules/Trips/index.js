@@ -97,7 +97,7 @@ class Trips extends Component {
                         </MenuTrigger>
                         <MenuOptions>
                             <MenuOption value={`Gallery::${el.name}`} text='View Images' />
-                            <MenuOption value={`AddMembers::${el.name}`} text='Add Members' />
+                            <MenuOption value={`AddMembers::${el.name}`} text='Members' />
                             <MenuOption value={"delete"} disabled text='Delete' />
                         </MenuOptions>
                     </Menu>
