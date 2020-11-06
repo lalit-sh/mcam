@@ -106,7 +106,7 @@ class Trips extends Component {
         })
     return (
         <Container>
-            <Header {...this.props} title="Trips" isBack={true}>
+            <Header {...this.props} title="Groups" isBack={true}>
                 <Button
                     transparent
                     onPress={this.manageAddTrip}>
@@ -116,7 +116,7 @@ class Trips extends Component {
             <Content>
                 {this.state.addingNew && 
                     <Item>
-                        <Input placeholder="Trip Name" onChangeText={this.handleTripName}/>
+                        <Input placeholder="Group Name" onChangeText={this.handleTripName}/>
                     </Item>
                 }
                 {isTrips &&
@@ -127,7 +127,7 @@ class Trips extends Component {
                 {(!isTrips && !this.state.addingNew) &&
                     <Content>
                         <Text>
-                            You dont have any trip. Add one now.
+                            You dont have any Group. Add one now.
                         </Text>
                     </Content>
                 }

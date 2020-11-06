@@ -10,7 +10,7 @@ import AuthMiddleware from "./middleware/auth";
 import LoginScreen from "../modules/Login";
 import RegisterScreen from "../modules/Register";
 import SideBar from '../shared/Sidebar';
-import Trips from "../modules/Trips";
+import Trips from "../modules/Trips"; // trips is used for groups page
 import AddMembers from "../modules/AddMembers";
 
 const headerMode = {
