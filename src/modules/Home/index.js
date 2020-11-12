@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from "native-base";
 import RNExitApp from 'react-native-exit-app';
-
-import Header from "../../shared/Header/index";
 import Camera from "./modules/camera";
 import AsyncStorage from '@react-native-community/async-storage';
-import { Alert } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 
 import { 
     getFileName,
@@ -99,6 +97,7 @@ class Home extends Component {
   render() {
     return (
       <Container>
+          <StatusBar backgroundColor={"#000"} hidden/>
           <Camera 
             onClick={this.handleClick}
             navigation={this.props.navigation}

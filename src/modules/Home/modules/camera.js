@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import ImagePicker from 'react-native-image-picker';
 import { Dimensions } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const cameraPermissionConfig = {
     title: 'Permission to use camera',
@@ -27,17 +28,20 @@ class Camera extends PureComponent {
         this.state = {
             frontCam: false,
             flash: false,
-            ratio: "4:3"
+            ratio: "16:9"
         }
     }
 
-    async componentDidUpdate(props,state) {
-        // if (this._camera ) {
-        //     console.log("this", this._camera)
-        // this.ratios = await this._camera.getSupportedRatiosAsync();
-        // console.log("ratios", this.ratios)
-        // }
-    }
+    componentDidMount = async () => {
+        try{
+            let ratio = await AsyncStorage.getItem("CAMERA_RATIO");
+            console.log("ratio", ratio);
+            if(ratio) this.setState({ratio: ratio})
+        }catch(err){
+            console.log(err);
+        }
+    };
+    
 
     getCameraType = () => {
         if(this.state.frontCam){
@@ -47,17 +51,12 @@ class Camera extends PureComponent {
     }
 
     getFlash = () => {
-        //possible values for flash: auto, on off, tourch
         if(this.state.flash){
             return RNCamera.Constants.FlashMode[this.state.flash];
         }
 
         return RNCamera.Constants.FlashMode.off;
     }
-
-    // getSupportedRatiosAsync = async (promise) => {
-    //     console.log(promise);
-    // }
 
     takePicture = async () => {
         try{
@@ -110,21 +109,29 @@ class Camera extends PureComponent {
         })
     }
     prepareRatio = async () => {
-        if (Platform.OS === 'android' && this._camera) {
-            let ratio = this.state.ratio
-            this.ratios = await this._camera.getSupportedRatiosAsync();
-            if (this.ratios) {
-                let index = this.ratios.indexOf(ratio)
-                if(this.ratios[index+1]) 
-                ratio = this.ratios[index+1]
+        try{
+            if (Platform.OS === 'android' && this._camera) {
+                let ratio = this.state.ratio
+    
                 
-                else
-                    ratio = this.ratios[0]
+                let ratios = await this._camera.getSupportedRatiosAsync();
+                if(ratio == "1:1") ratio = "4:3"
+                else if(ratio == "4:3"){
+                    if(ratios.includes("19:9"))
+                        ratio = "19:9";
+                    else if(ratios.includes("16:9"))
+                        ratio = "16:9";
+                    else
+                        ration= "1:1"
+                } else if(ratio == '19:9' || ratio == '16:9'){
+                    ratio = "1:1";
+                }
+                console.log(ratio)
+                await AsyncStorage.setItem("CAMERA_RATIO", ratio)
                 this.setState({ ratio: ratio });
-                console.log("setState", ratio)
             }
-             
-             
+        }catch(err){
+            console.log("Error in prepareRatio", err)
         }
     }
     getPreviewHeight = () => {
@@ -136,7 +143,6 @@ class Camera extends PureComponent {
         let w = ratio[1]
         hght = (h*width/w);
         if(height - hght < 200) return height;
-        console.log(hght);
         if(hght < 100) return 100;
         return hght;
     }
@@ -145,9 +151,16 @@ class Camera extends PureComponent {
         let height = this.getPreviewHeight();
         return (
             <View style={styles.container}>
-                <Header {...this.props} onFlash = {this.handleFlash} flash = {this.state.flash} aspectRatio = {this.prepareRatio} ratio = {this.state.ratio}/>
+                <Header 
+                    {...this.props} 
+                    onFlash = {this.handleFlash} 
+                    isFlash={!this.state.frontCam}
+                    flash = {this.state.flash}
+                    onRatioChange = {this.prepareRatio} 
+                    ratio = {(this.state.ratio == "16:9" || this.state.ratio == "19:9") ? "FULL_SCREEN" : this.state.ratio}
+                />
                 <RNCamera
-                     ratio={this.state.ratio}
+                    ratio={this.state.ratio}
                     ref={(ref) => {
                         this._camera = ref;
                     }}

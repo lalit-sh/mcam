@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { cameraStyle as styles } from "../style";
+import { cameraStyle as styles, ratioIconStyle } from "../style";
 import { TouchableOpacity, View, Image, Text } from 'react-native';
 import { Icon } from "native-base";
 import { DrawerActions } from 'react-navigation-drawer';
 import { RNCamera } from 'react-native-camera';
 const flashIcons = {
-  on: "flash",
-  auto: "flash"
+  on: "flash-on",
+  auto: "flash-auto",
+  off: "flash-off"
 }
 class CameraHeader extends Component {
   constructor(props) {
@@ -15,35 +16,47 @@ class CameraHeader extends Component {
     };
   }
 
-  // addTrip = () => {
-  //   this.props.navigation.navigate("Trips");
-  // }
   showSidebar=()=> {
     let { navigation } = this.props;
     return navigation.dispatch(DrawerActions.toggleDrawer());
   }
+
   handleTrips = () => {
     this.props.navigation.navigate("Trips");
   }
+
   render() {
-    let flashIcon, ratio = this.props.ratio
-    if (this.props.flash == "on") flashIcon = "flash"
-    else if (this.props.flash == "auto") flashIcon = "flash-auto"
-    else if (this.props.flash == false) flashIcon = "flash-off"
-    console.log("abc", this.props.flash, flashIcon, ratio)
+    let { isFlash, flash, ratio, isRatio, onRatioChange } = this.props;
+    let flashIcon = flashIcons[flash || "off"];
     return (
       <View style={styles.header}>
-          <Icon type="AntDesign" name={"addusergroup"} style={{color: "#fff", width:25}} onPress={this.handleTrips}/>
-          <Icon type="MaterialCommunityIcons" name={flashIcon} style={{color: "#fff", width:25}} onPress={this.props.onFlash}/>
-          <View style={{width:32}}>
-            <View style={{ width:28, borderRadius:5, textAlign: 'center'}}></View>
-            <Text style={{color: "#fff",  borderColor:"#fff", borderWidth: 1, paddingLeft:6, fontWeight: 'bold', borderRadius:10, width:40}} onPress={this.props.aspectRatio}>{ratio} </Text>
-         </View>
-          <Icon type="Entypo" name={"cog"} style={{color: "#fff", width:25}} onPress={this.showSidebar}/>
+          <Icon type="MaterialIcons" name={"group-add"} style={{...styles.headerIconStyle, fontSize: 32}} onPress={this.handleTrips}/>
+          {isFlash && 
+            <Icon type="MaterialIcons" name={flashIcon} style={styles.headerIconStyle} onPress={this.props.onFlash}/>
+          }
+          {isRatio &&
+            <RatioIcon ratio={ratio} onPress={onRatioChange} />
+          }
+          <Icon type="MaterialIcons" name={"settings"} style={styles.headerIconStyle} onPress={this.showSidebar}/>
       </View>
     );
   }
 }
 
+const RatioIcon = (props) => {
+  let { ratio, onPress } = props;
+  return  <TouchableOpacity style={ratioIconStyle.container} onPress={onPress}>
+            <View style={ratioIconStyle.body} />
+            {ratio !== 'FULL_SCREEN' &&
+              <Text 
+                style={ratioIconStyle.text}>{ratio}</Text>
+            }
+          </TouchableOpacity>
+}
+
+CameraHeader.defaultProps = {
+  isFlash: true,
+  isRatio: true
+}
 
 export default CameraHeader;
