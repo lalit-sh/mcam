@@ -5,6 +5,10 @@ import {
     SET_ACTIVE_TRIP
 } from "../../utils/constants/trips.constant";
 import { 
+    LOGOUT
+} from "../../utils/constants/identity.constants";
+
+import { 
     CLEAR_ERROR
 } from "../../utils/constants/error.constants";
 const initialState = { 
@@ -42,6 +46,12 @@ const tripsReducer = (state = initialState, action) => {
                 ...state,
                 activeTrip: action.payload
             };
+        case LOGOUT:
+            return {
+                ...state,
+                activeTrip: null,
+                trips: []
+            }
         default:
             return state;
     }

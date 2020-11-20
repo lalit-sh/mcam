@@ -1,27 +1,48 @@
 import { StyleSheet } from "react-native";
+import { Dimensions } from 'react-native'
+
+let {width, height} = Dimensions.get('window');
+const bgColor = "rgba(0,0,0,1)";
+const hfcolor = "rgba(0,0,0, 0.4)";
 
 export const cameraStyle = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'transparent',
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    backgroundColor: bgColor,
+    height: height,
+    justifyContent: 'center',
   },
   footer:{
-    flex: 0, 
+    // flex: 0, 
     flexDirection: 'row', 
     justifyContent: 'space-between', 
     alignItems: "center", 
-    padding: 20, 
+    padding: 20,
     position: "absolute",
     right: 0,
     left: 0,
     bottom: 0,
-    // backgroundColor: 'rgba(52, 52, 52, 0.4)'
+    backgroundColor: hfcolor
+  },
+  header:{
+    backgroundColor: hfcolor,
+    // opacity: 0.1,
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    position: 'absolute',
+    paddingTop: 15,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 10,
+    top: 0,
+    right: 0,
+    left: 0,
+    zIndex: 1
+  },
+  headerIconStyle: {
+    color: "#fff",
+    fontSize: 28
   },
   capture: {
     flex: 0,
@@ -46,3 +67,27 @@ export const cameraStyle = StyleSheet.create({
     borderRadius: 50
   }
 });
+
+export const ratioIconStyle = {
+  container: {
+    textAlign: "center", 
+    justifyContent: "center", 
+    width:28,
+  },
+  body: {
+    width:18, 
+    height: 26, 
+    borderRadius:5,
+    textAlign: 'center', 
+    borderColor:"#fff", 
+    borderWidth: 1,
+    position: "absolute",
+    left: "20%"
+  },
+  text: {
+    backgroundColor: "#000", 
+    textAlign: "center",
+    color: "#fff",
+    borderRadius: 5
+  }
+}
