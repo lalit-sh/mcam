@@ -28,8 +28,6 @@ class AuthMiddleWare extends Component {
   }
 
   checkAuthentication = async () => {
-        console.log(this.props.identity)
-        
         if(this.props.identity.isLoggedIn){
           if(this.isSessionExpired()){
             return this.props.logout();
