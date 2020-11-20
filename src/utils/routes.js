@@ -12,6 +12,7 @@ import RegisterScreen from "../modules/Register";
 import SideBar from '../shared/Sidebar';
 import Trips from "../modules/Trips";
 import AddMembers from "../modules/AddMembers";
+import SettingModule from "../modules/Settings";
 
 const headerMode = {
     headerMode: "none",
@@ -29,7 +30,8 @@ const AuthStackRoutes = createStackNavigator({
 const mainStack = createStackNavigator({
     Home: Home,
     Trips: Trips,
-    AddMembers: AddMembers
+    AddMembers: AddMembers,
+    Settings: SettingModule
 }, headerMode)
 
 const AppNavigator = createDrawerNavigator({
