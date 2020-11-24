@@ -5,24 +5,26 @@ import { bindActionCreators } from 'redux'
 import { getTrips, createTrip, updateTrip, deleteTrip, clearError, markTripActive } from "../../redux/actions/trips.action";
 import Loading from "../../shared/Loading";
 import Header from "../../shared/Header";
-import Toast from 'react-native-easy-toast'
+import {Modal} from "react-native"
+import Toast from 'react-native-easy-toast';
+import { style } from './style';
 import {
     Menu,
     MenuOptions,
     MenuOption,
     MenuTrigger,
   } from 'react-native-popup-menu';
+import { color } from 'react-native-reanimated';
 
 class Trips extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        addingNew: false,
         tripName: "",
-        isMenuOpen: false
+        isMenuOpen: false,
+        show: false
     };
     this._toast = createRef();
-    this.manageAddTrip = this.manageAddTrip.bind(this);
   }
 
   componentDidMount = () => {
@@ -36,20 +38,10 @@ class Trips extends Component {
       this.props.clearError();
     }
   };
-  
 
   manageAddTrip = () => {
-    if(this.state.addingNew){
         if(this.state.tripName && this.state.tripName.trim() !== "")
             this.props.createTrip(this.state.tripName);
-        this.setState({
-            addingNew: false
-        });
-    }else{
-        this.setState({
-            addingNew: true
-        });
-    }
   }
 
   handleTripName = tripName => {
@@ -83,16 +75,16 @@ class Trips extends Component {
         tripList = trips.map((el, i) => {
             return <ListItem thumbnail key={el.name + i} button onPress={this.markSelected.bind(this, el)}>
                 <Left>
-                    <Thumbnail square source={{ uri: 'https://picsum.photos/id/237/200/200' }} />
+                    <Thumbnail square source={{ uri: 'https://img.icons8.com/color/72/gallery.png' }} />
                 </Left>
                 <Body>
-                    <Text>{el.name}</Text>
+                    <Text style = {{fontSize: 20}}>{el.name}</Text>
                 </Body>
                 <Right>
                     <Menu onSelect={this.handleMenuSelect}>
-                        <MenuTrigger style={{disabled: "flex", width: 20, height: 20, justifyContent: "center", alignItems: 'center',}}>
+                        <MenuTrigger style={{disabled: "flex", width: 20, height: 20, justifyContent: "center", alignItems: 'center'}}>
                             <View>
-                                <Icon type="FontAwesome" name="ellipsis-v"/>
+                                <Icon type="FontAwesome" name="ellipsis-v" style = {{fontSize: 20}}/>
                             </View>
                         </MenuTrigger>
                         <MenuOptions>
@@ -102,38 +94,57 @@ class Trips extends Component {
                         </MenuOptions>
                     </Menu>
                 </Right>
+               
             </ListItem>
         })
     return (
-        <Container>
+        <Container >
             <Header {...this.props} title="Groups" isBack={true}>
-                <Button
-                    transparent
-                    onPress={this.manageAddTrip}>
-                        <Icon type="FontAwesome" name={this.state.addingNew ? "check" : "plus"} />
+                <Button transparent>
+                        <Icon type="FontAwesome" name="ellipsis-v" style = {{color: "#000"}}/>
                 </Button>
             </Header>
-            <Content>
-                {this.state.addingNew && 
-                    <Item>
-                        <Input placeholder="Group Name" onChangeText={this.handleTripName}/>
-                    </Item>
-                }
+            <Content style = {{top:50}} >
                 {isTrips &&
-                    <List>
+                    <List style = {{ border: 5}}>
                         {tripList}
                     </List>
                 }
-                {(!isTrips && !this.state.addingNew) &&
+                {(!isTrips) &&
                     <Content>
                         <Text>
                             You dont have any Group. Add one now.
                         </Text>
                     </Content>
                 }
-            </Content>
-            <Toast ref={this._toast}/>
-        </Container>
+               </Content>
+            <Toast ref={this._toast}/>   
+            <Modal style = {{marginTop:50}}
+                    transparent={true}
+                    visible={this.state.show}>
+
+                <View style= {style.modelViewOne}>
+                <View style = {style.modelViewTwo}>
+                    <Input placeholder = "Please enter group name" onChangeText={this.handleTripName} style = {style.popupInut}/>
+                        <View style = {style.popupView}>
+                            <Button onPress= {()=>{this.setState({show:false})}} style = {style.cancelButton}>
+                                <Text>
+                                    Cancel
+                                </Text>
+                            </Button>
+                            <Button onPress= {this.manageAddTrip} style = {style.okButton}>
+                                <Text>
+                                     OK
+                                </Text>
+                            </Button>
+                        </View>
+                    </View>
+                    </View>
+                </Modal>
+                <Icon type="AntDesign" name= "pluscircle" onPress={()=>{this.setState({show:true})}} style={style.plusButton}/>
+           </Container>
+           
+           
     );
   }
 }

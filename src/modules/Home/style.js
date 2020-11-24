@@ -44,6 +44,13 @@ export const cameraStyle = StyleSheet.create({
     color: "#fff",
     fontSize: 28
   },
+  addTripIconStyle: {
+    // position: "absolute",
+    textAlign: "center",
+    // right:0,
+    // alignSelf: 'flex-end',
+    flex: 1, flexDirection: 'row'
+  },
   capture: {
     flex: 0,
     borderColor: "#686868",

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Left, Button, Icon, Body, Right, Title } from "native-base";
 import { DrawerActions } from 'react-navigation-drawer';
+import {style} from './style';
 
 
 class HeaderComponent extends Component {
@@ -21,16 +22,16 @@ class HeaderComponent extends Component {
   render() {
     let { title, children, isBack } = this.props;
     return (
-        <Header>
+        <Header style = {style.header}>
             <Left>
                 <Button
                     transparent
                     onPress={this.handleMenuAction}>
-                    <Icon type="FontAwesome" name={isBack ? "chevron-left" : "bars"} />
+                    <Icon type="FontAwesome" name={isBack ? "chevron-left" : "bars"} style = {style.text}/>
                 </Button>
             </Left>
             <Body>
-                <Title>{title}</Title>
+                <Title style = {style.text}>{title}</Title>
             </Body>
             <Right>
                 {children}
