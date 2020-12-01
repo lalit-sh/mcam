@@ -18,7 +18,7 @@ class CameraHeader extends Component {
 
   showSidebar=()=> {
     let { navigation } = this.props;
-    return navigation.dispatch(DrawerActions.toggleDrawer());
+    return navigation.navigate("Settings");
   }
 
   handleTrips = () => {
