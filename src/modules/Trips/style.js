@@ -66,5 +66,9 @@ export const style = StyleSheet.create({
         bottom:5, 
         color:"#606060", 
         fontSize: 72
+    },
+    noContentText: {
+        textAlign: "center",
+        marginBottom: 5
     }
 });

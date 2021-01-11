@@ -8,7 +8,7 @@ import { Container, Button, Icon, List, ListItem, Thumbnail, Text, Item, Body, R
 import Loading from "../../shared/Loading";
 import Header from "../../shared/Header";
 
-class AddMember extends Component {
+class ManageGroups extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -131,4 +131,4 @@ function mapDispathToProps(dispatch) {
   });
   
 
-export default connect(mapStateToProps, mapDispathToProps)(AddMember);
+export default connect(mapStateToProps, mapDispathToProps)(ManageGroups);

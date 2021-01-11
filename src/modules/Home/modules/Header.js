@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { cameraStyle as styles, ratioIconStyle } from "../style";
 import { TouchableOpacity, View, Image, Text } from 'react-native';
 import { Icon } from "native-base";
-import { DrawerActions } from 'react-navigation-drawer';
-import { RNCamera } from 'react-native-camera';
+// import { DrawerActions } from 'react-navigation-drawer';
+// import { RNCamera } from 'react-native-camera';
 const flashIcons = {
   on: "flash-on",
   auto: "flash-auto",

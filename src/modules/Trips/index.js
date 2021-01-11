@@ -15,6 +15,9 @@ import {
     MenuTrigger,
   } from 'react-native-popup-menu';
 import { color } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-community/async-storage';
+import SwitchWithIcons from "react-native-switch-with-icons";
+ 
 
 class Trips extends Component {
   constructor(props) {
@@ -30,6 +33,22 @@ class Trips extends Component {
   componentDidMount = () => {
     if((!this.props.trips || !this.props.trips.trips || this.props.trips.trips.length == 0) && !this.props.loading)
         this.props.getTrips();
+    this.setActiveTripFromStorage();
+  }
+
+  setActiveTripFromStorage = async () => {
+    try{
+        let activetrip = await AsyncStorage.getItem('ACTIVE_TRIP');
+        if(activetrip){
+            activetrip = JSON.parse(activetrip);
+
+            if(activetrip && activetrip._id && (!this.props.trips.activeTrip || (activetrip._id !== this.props.activeTrip._id))){
+                this.markSelected(activetrip)
+            }
+        }
+    }catch(err){
+        console.log(err);
+    }
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
@@ -59,8 +78,21 @@ class Trips extends Component {
     return false;
   }
 
-  markSelected(trip){
+  handleTrip = trip => {
+      if(trip)
+        this.props.navigation.navigate("ManageTrip", trip._id);
+  }
+
+  markSelected(trip, event){
       this.props.markTripActive(trip);
+  }
+
+  isTripActive(trip){
+      console.log("trips")
+      console.log(trip)
+      console.log(this.props)
+      if(trip && this.props.trips && this.props.trips.activeTrip && this.props.trips.activeTrip._id == trip._id) return true;
+      return false;
   }
 
   render() {
@@ -71,9 +103,9 @@ class Trips extends Component {
     let isTrips = trips.length > 0;
     let tripList = null;
     if(isTrips)
-        trips = trips.sort((x, y) => x.isActive ? -1 : 0);
+        // trips = trips.sort((x, y) => x.isActive ? -1 : 0);
         tripList = trips.map((el, i) => {
-            return <ListItem thumbnail key={el.name + i} button onPress={this.markSelected.bind(this, el)}>
+            return <ListItem thumbnail key={el.name + i} button onPress={() => this.handleTrip(el)}>
                 <Left>
                     <Thumbnail square source={{ uri: 'https://img.icons8.com/color/72/gallery.png' }} />
                 </Left>
@@ -81,7 +113,11 @@ class Trips extends Component {
                     <Text style = {{fontSize: 20}}>{el.name}</Text>
                 </Body>
                 <Right>
-                    <Menu onSelect={this.handleMenuSelect}>
+                    <SwitchWithIcons 
+                        onValueChange={this.markSelected.bind(this, el)}
+                        value={this.isTripActive(el)}
+                    />
+                    {/* <Menu onSelect={this.handleMenuSelect}>
                         <MenuTrigger style={{disabled: "flex", width: 20, height: 20, justifyContent: "center", alignItems: 'center'}}>
                             <View>
                                 <Icon type="FontAwesome" name="ellipsis-v" style = {{fontSize: 20}}/>
@@ -92,7 +128,7 @@ class Trips extends Component {
                             <MenuOption value={`AddMembers::${el.name}`} text='Members' />
                             <MenuOption value={"delete"} disabled text='Delete' />
                         </MenuOptions>
-                    </Menu>
+                    </Menu> */}
                 </Right>
                
             </ListItem>
@@ -104,7 +140,7 @@ class Trips extends Component {
                         <Icon type="FontAwesome" name="ellipsis-v" style = {{color: "#000"}}/>
                 </Button>
             </Header>
-            <Content style = {{top:50}} >
+            <Content style = {{top:20}} >
                 {isTrips &&
                     <List style = {{ border: 5}}>
                         {tripList}
@@ -112,8 +148,14 @@ class Trips extends Component {
                 }
                 {(!isTrips) &&
                     <Content>
-                        <Text>
-                            You dont have any Group. Add one now.
+                        <Text style={style.noContentText}>
+                            You don't have any group yet.
+                        </Text>
+                        <Text style={style.noContentText}>
+                            Create one by clicking
+                        </Text>
+                        <Text style={style.noContentText}>
+                            <Icon type="AntDesign" name= "pluscircle" onPress={()=>{this.setState({show:true})}} style={{...style.plusButton, fontSize: 24}}/>
                         </Text>
                     </Content>
                 }

@@ -11,7 +11,7 @@ import LoginScreen from "../modules/Login";
 import RegisterScreen from "../modules/Register";
 import SideBar from '../shared/Sidebar';
 import Trips from "../modules/Trips"; // trips is used for groups page
-import AddMembers from "../modules/AddMembers";
+import ManageTrip from "../modules/ManageGroups";
 import SettingModule from "../modules/Settings";
 
 const headerMode = {
@@ -27,22 +27,22 @@ const AuthStackRoutes = createStackNavigator({
     Register: RegisterScreen
 }, headerMode);
 
-const mainStack = createStackNavigator({
+const MainStack = createStackNavigator({
     Home: Home,
     Trips: Trips,
-    AddMembers: AddMembers,
+    ManageTrip: ManageTrip,
     Settings: SettingModule
 }, headerMode)
 
-const AppNavigator = createDrawerNavigator({
-    MainStack: mainStack
-}, Object.assign({contentComponent: props => <SideBar {...props}/>},headerMode));
+// const AppNavigator = createDrawerNavigator({ //side bar disabled
+//     MainStack: mainStack
+// }, Object.assign({contentComponent: props => <SideBar {...props}/>},headerMode));
 
 const AppContainer = createAppContainer(createSwitchNavigator(
     {   
         AuthMiddleware: AuthMiddleware,
         Auth: AuthStackRoutes,
-        App: AppNavigator
+        App: MainStack
     },
     {
         initialRouteName: 'AuthMiddleware'

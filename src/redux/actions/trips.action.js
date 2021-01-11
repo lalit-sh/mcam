@@ -104,8 +104,8 @@ export const deleteTrip = (trips = []) => (dispatch, getState) => {
 };
 
 export const markTripActive = (trip) => (dispatch, getState) => {
-    setActiveTripToStorage(trip);
     dispatch(setActiveTrip(trip));
+    setActiveTripToStorage(trip);
 }
 
 const setActiveTripToStorage = async trip => {
