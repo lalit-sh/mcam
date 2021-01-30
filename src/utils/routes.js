@@ -33,8 +33,6 @@ const MainStack = createStackNavigator({
     Trips: Trips,
     ManageTrip: ManageTrip,
     Settings: SettingModule,
-    AddMembers: AddMembers,
-    Settings: SettingModule,
     CameraSetting: CameraSetting
 }, headerMode)
 
