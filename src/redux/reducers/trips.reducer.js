@@ -2,7 +2,8 @@ import {
     PROCESS_TRIP_STARTED,
     PROCESS_TRIP_FAILED,
     GET_TRIP_SUCCESS,
-    SET_ACTIVE_TRIP
+    SET_ACTIVE_TRIP,
+    NEW_GROUP_ADDED
 } from "../../utils/constants/trips.constant";
 import { 
     LOGOUT
@@ -11,6 +12,7 @@ import {
 import { 
     CLEAR_ERROR
 } from "../../utils/constants/error.constants";
+
 const initialState = { 
     trips: [],
     loading: false
@@ -51,6 +53,20 @@ const tripsReducer = (state = initialState, action) => {
                 ...state,
                 activeTrip: null,
                 trips: []
+            }
+        case NEW_GROUP_ADDED:
+            let trips = [], activeTrip = state.activeTrip;
+            if(!state.trips || state.trips.length == 0)
+                activeTrip = action.payload;
+            if(state.trips && state.trips.length)
+                trips = [...state.trips]
+            trips.push(action.payload)
+
+            return {
+                ...state,
+                trips: trips,
+                activeTrip: activeTrip,
+                loading: false
             }
         default:
             return state;

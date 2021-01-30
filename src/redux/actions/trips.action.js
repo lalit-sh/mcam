@@ -2,7 +2,8 @@ import {
     PROCESS_TRIP_STARTED,
     PROCESS_TRIP_FAILED,
     GET_TRIP_SUCCESS,
-    SET_ACTIVE_TRIP
+    SET_ACTIVE_TRIP,
+    NEW_GROUP_ADDED
 } from "../../utils/constants/trips.constant";
 import { 
     CLEAR_ERROR
@@ -40,12 +41,14 @@ export const createTrip = (tripName) => (dispatch, getState) =>  {
     dispatch(started());
     service.createTrip(tripName, getToken(getState))
     .then(resp => {
-        console.log("resp", resp)
         if(resp && resp.data && !resp.data.message){
-            getTrips()(dispatch, getState)
+            dispatch({
+                type: NEW_GROUP_ADDED,
+                payload: resp.data
+            })
+            // getTrips()(dispatch, getState)
         }else{
             let message = resp.data.message;
-            console.log(message, message && message.includes("duplicate key error collection"))
             if(message && message.includes("duplicate key error collection")){
                 message = `Trip "${tripName}" already exsit.`
             }
@@ -105,13 +108,13 @@ export const deleteTrip = (trips = []) => (dispatch, getState) => {
 
 export const markTripActive = (trip) => (dispatch, getState) => {
     dispatch(setActiveTrip(trip));
-    setActiveTripToStorage(trip);
+    // setActiveTripToStorage(trip);
 }
 
-const setActiveTripToStorage = async trip => {
-    try{
-        await AsyncStorage.setItem('ACTIVE_TRIP', JSON.stringify(trip));
-    }catch(err){
-        console.log("err", err);
-    }
-}
+// const setActiveTripToStorage = async trip => {
+//     try{
+//         await AsyncStorage.setItem('ACTIVE_TRIP', JSON.stringify(trip));
+//     }catch(err){
+//         console.log("err", err);
+//     }
+// }

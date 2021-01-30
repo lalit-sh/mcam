@@ -8,13 +8,6 @@ import Header from "../../shared/Header";
 import {Modal} from "react-native"
 import Toast from 'react-native-easy-toast';
 import { style } from './style';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-  } from 'react-native-popup-menu';
-import { color } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-community/async-storage';
 import SwitchWithIcons from "react-native-switch-with-icons";
  
@@ -33,22 +26,6 @@ class Trips extends Component {
   componentDidMount = () => {
     if((!this.props.trips || !this.props.trips.trips || this.props.trips.trips.length == 0) && !this.props.loading)
         this.props.getTrips();
-    this.setActiveTripFromStorage();
-  }
-
-  setActiveTripFromStorage = async () => {
-    try{
-        let activetrip = await AsyncStorage.getItem('ACTIVE_TRIP');
-        if(activetrip){
-            activetrip = JSON.parse(activetrip);
-
-            if(activetrip && activetrip._id && (!this.props.trips.activeTrip || (activetrip._id !== this.props.activeTrip._id))){
-                this.markSelected(activetrip)
-            }
-        }
-    }catch(err){
-        console.log(err);
-    }
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
@@ -56,10 +33,15 @@ class Trips extends Component {
       this._toast.current.show(this.props.trips.error, 100);
       this.props.clearError();
     }
+    if(this.state.show && prevProps.loading && !this.props.loading && !this.props.trips.error){
+        this.setState({
+            show: false
+        })
+    }
   };
 
   manageAddTrip = () => {
-        if(this.state.tripName && this.state.tripName.trim() !== "")
+        if(!this.props.loading && this.state.tripName && this.state.tripName.trim() !== "")
             this.props.createTrip(this.state.tripName);
   }
 
@@ -69,18 +51,17 @@ class Trips extends Component {
       });
   }
 
-  handleMenuSelect = value => {
-    value = value.split("::");
-    if(value[0] !== "delete"){
-        this.props.navigation.navigate(value[0], value[1] ? {tripName: value[1]} : "");
-        return true;
+  handleEllipseMenu = value => {
+    let tasks = {
+        "Refresh": this.props.getTrips
     }
-    return false;
+    tasks[value] && tasks[value](); 
+    return true;
   }
 
   handleTrip = trip => {
       if(trip)
-        this.props.navigation.navigate("ManageTrip", trip._id);
+        this.props.navigation.navigate("ManageTrip", {tripId: trip._id});
   }
 
   markSelected(trip, event){
@@ -88,17 +69,15 @@ class Trips extends Component {
   }
 
   isTripActive(trip){
-      console.log("trips")
-      console.log(trip)
-      console.log(this.props)
       if(trip && this.props.trips && this.props.trips.activeTrip && this.props.trips.activeTrip._id == trip._id) return true;
       return false;
   }
 
   render() {
     let { trips, loading } = this.props.trips;
-    if(loading)
-        return <Loading />
+    loading = true;
+    // if(loading)
+        // return <Loading />
     
     let isTrips = trips.length > 0;
     let tripList = null;
@@ -117,29 +96,13 @@ class Trips extends Component {
                         onValueChange={this.markSelected.bind(this, el)}
                         value={this.isTripActive(el)}
                     />
-                    {/* <Menu onSelect={this.handleMenuSelect}>
-                        <MenuTrigger style={{disabled: "flex", width: 20, height: 20, justifyContent: "center", alignItems: 'center'}}>
-                            <View>
-                                <Icon type="FontAwesome" name="ellipsis-v" style = {{fontSize: 20}}/>
-                            </View>
-                        </MenuTrigger>
-                        <MenuOptions>
-                            <MenuOption value={`Gallery::${el.name}`} text='View Images' />
-                            <MenuOption value={`AddMembers::${el.name}`} text='Members' />
-                            <MenuOption value={"delete"} disabled text='Delete' />
-                        </MenuOptions>
-                    </Menu> */}
                 </Right>
                
             </ListItem>
         })
     return (
         <Container >
-            <Header {...this.props} title="Groups" isBack={true}>
-                <Button transparent>
-                        <Icon type="FontAwesome" name="ellipsis-v" style = {{color: "#000"}}/>
-                </Button>
-            </Header>
+            <Header {...this.props} title="Groups" isBack={true} isEllipseMenu={true} ellipseMenu={["Refresh"]} onEllipseItemClick={this.handleEllipseMenu}/>
             <Content style = {{top:20}} >
                 {isTrips &&
                     <List style = {{ border: 5}}>
@@ -159,15 +122,14 @@ class Trips extends Component {
                         </Text>
                     </Content>
                 }
-               </Content>
+            </Content>
             <Toast ref={this._toast}/>   
             <Modal style = {{marginTop:50}}
                     transparent={true}
                     visible={this.state.show}>
-
                 <View style= {style.modelViewOne}>
-                <View style = {style.modelViewTwo}>
-                    <Input placeholder = "Please enter group name" onChangeText={this.handleTripName} style = {style.popupInut}/>
+                    <View style = {style.modelViewTwo}>
+                        <Input placeholder = "Please enter group name" onChangeText={this.handleTripName} style = {style.popupInut}/>
                         <View style = {style.popupView}>
                             <Button onPress= {()=>{this.setState({show:false})}} style = {style.cancelButton}>
                                 <Text>
@@ -175,18 +137,19 @@ class Trips extends Component {
                                 </Text>
                             </Button>
                             <Button onPress= {this.manageAddTrip} style = {style.okButton}>
-                                <Text>
-                                     OK
-                                </Text>
+                                {loading ?
+                                    <Loading /> :
+                                    <Text>
+                                        OK
+                                    </Text>
+                                }
                             </Button>
                         </View>
                     </View>
-                    </View>
-                </Modal>
+                </View>
+            </Modal>
                 <Icon type="AntDesign" name= "pluscircle" onPress={()=>{this.setState({show:true})}} style={style.plusButton}/>
-           </Container>
-           
-           
+        </Container> 
     );
   }
 }

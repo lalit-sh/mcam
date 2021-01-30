@@ -29,6 +29,7 @@ export const login = (username, password) => dispatch => {
     dispatch(authStarted());
     service.login(username, password)
     .then(resp => {
+        console.log("auth", resp)
         if(resp && resp.data && resp.data.token){
             dispatch(authSuccess(Object.assign({}, resp.data, {username})));
         }else{
@@ -36,7 +37,9 @@ export const login = (username, password) => dispatch => {
         }
     })
     .catch(err => {
-        dispatch(authFailed(UNKOWN_ERROR))
+        console.log(err);
+        let message = err.message || UNKOWN_ERROR
+        dispatch(authFailed(message))
     });
 }
 
@@ -44,13 +47,18 @@ export const signup = ({username, password, name, deviceId}) => dispatch => {
     dispatch(authStarted());
     service.signup({username, password, name, deviceId})
     .then(resp => {
+        console.log('signup resp', resp)
         if(resp && resp.data && resp.data.token){
             dispatch(authSuccess(Object.assign({}, resp.data, {username})));
         }else{
             dispatch(authFailed(resp.data.message))
         }
     })
-    .catch(err => dispatch(authFailed(UNKOWN_ERROR)));
+    .catch(err => {
+        console.log(err)
+        let msg = err.message || UNKOWN_ERROR; 
+        dispatch(authFailed(msg));
+    });
 }
 
 export const clearError = () => (dispatch) => {
