@@ -8,7 +8,7 @@ import { logger } from "redux-logger";
 const persistConfig = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ['identity']
+    whitelist: ['identity', "users", "trips"]
 }
 
 const middleware = [thunk, logger];

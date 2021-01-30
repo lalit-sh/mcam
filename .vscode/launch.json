@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Node",
+            "type": "node",
+            "request": "attach",
+            "port": 10010
+        },
+        {
             "name": "Debug Android",
             "cwd": "${workspaceFolder}",
             "type": "reactnative",

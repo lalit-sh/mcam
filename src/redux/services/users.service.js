@@ -12,3 +12,16 @@ export const getUserContacts = (token) => {
         }
     });
 }
+
+export const syncUserContacts = (con, token) => {
+    let url = `${API_URL}users/contacts`;
+    return Axios({
+        method: "post",
+        url: url,
+        data: {contacts: con},
+        headers: {
+            "accept": "Appication/json",
+            "Authorization": token
+        }
+    });
+}

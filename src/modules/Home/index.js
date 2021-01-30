@@ -28,8 +28,7 @@ class Home extends Component {
 
   getActiveTrip = async () => {
     try{
-        this.activeTrip = await AsyncStorage.getItem('ACTIVE_TRIP');
-        console.log("this", this.activeTrip);
+        this.activeTrip = this.props.activeTrip;
         if(this.activeTrip && typeof this.activeTrip == 'string'){
             this.activeTrip = JSON.parse(this.activeTrip);
             return this.activeTrip;
