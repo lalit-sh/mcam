@@ -13,6 +13,7 @@ import SideBar from '../shared/Sidebar';
 import Trips from "../modules/Trips"; // trips is used for groups page
 import ManageTrip from "../modules/ManageGroups";
 import SettingModule from "../modules/Settings";
+import CameraSetting from "../modules/Settings/modules/CameraSetting";
 
 const headerMode = {
     headerMode: "none",
@@ -31,7 +32,10 @@ const MainStack = createStackNavigator({
     Home: Home,
     Trips: Trips,
     ManageTrip: ManageTrip,
-    Settings: SettingModule
+    Settings: SettingModule,
+    AddMembers: AddMembers,
+    Settings: SettingModule,
+    CameraSetting: CameraSetting
 }, headerMode)
 
 // const AppNavigator = createDrawerNavigator({ //side bar disabled
