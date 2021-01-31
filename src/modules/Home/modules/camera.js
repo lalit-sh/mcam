@@ -35,7 +35,6 @@ class Camera extends PureComponent {
     componentDidMount = async () => {
         try{
             let ratio = await AsyncStorage.getItem("CAMERA_RATIO");
-            console.log("ratio", ratio);
             if(ratio) this.setState({ratio: ratio})
         }catch(err){
             console.log(err);
@@ -100,7 +99,6 @@ class Camera extends PureComponent {
 
     handleFlash = () => {
         let flash = this.state.flash
-        console.log(flash)
         if ( !flash ) flash = "on"
         else if ( flash == "on") flash = "auto"
         else if (flash == "auto") flash = false
@@ -126,7 +124,6 @@ class Camera extends PureComponent {
                 } else if(ratio == '19:9' || ratio == '16:9'){
                     ratio = "1:1";
                 }
-                console.log(ratio)
                 await AsyncStorage.setItem("CAMERA_RATIO", ratio)
                 this.setState({ ratio: ratio });
             }
@@ -169,6 +166,7 @@ class Camera extends PureComponent {
                       }}
                     type={this.getCameraType()}
                     flashMode={this.getFlash()}
+                    playSoundOnCapture={true}
                     androidCameraPermissionOptions={cameraPermissionConfig}
                     androidRecordAudioPermissionOptions={audioRecordingPermissionConfig}
                 />
