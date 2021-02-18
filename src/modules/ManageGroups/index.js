@@ -36,7 +36,7 @@ class ManageGroups extends Component {
 
   _handleAppStateChange = (nextAppState) => {
     if (this.state.requestingPermission && this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-      this.state.syncUserContacts();
+      this.syncUserContacts();
     }
   }
 
@@ -91,13 +91,17 @@ class ManageGroups extends Component {
           if(Array.isArray(el.phoneNumbers)){
             el.phoneNumbers.map(l => {
               o["number"] = l.number.replace(/[^0-9]/g, "")
-              c.push(o);
+              console.log("o.number", o.number, this.props.username)
+              if(o.number !== this.props.username)
+                c.push(o);
             })
           }
 
           if(typeof el.phoneNumbers == 'string'){
             o["number"] = el.phoneNumbers.replace(/[^0-9]/g, "");
-            c.push(o);
+            console.log("o.number", o.number, this.props.username)
+            if(o.number !== this.props.username)
+              c.push(o);
           }
         })
         this.props.syncUserContacts(c);
@@ -162,8 +166,13 @@ class ManageGroups extends Component {
       if(!m || !Array.isArray(m)){
         m = [];
       }
-      m.push(username);
-      this.props.updateTrip(this.state.tripName,  {members: m})
+      let i = m.indexOf(username);
+      if(i > -1){
+        m.splice(i, 1);
+      }else{
+        m.push(username);
+      }
+      this.props.updateTrip(trip.name,  {members: m})
     }
   }
 
@@ -177,7 +186,7 @@ class ManageGroups extends Component {
 
   render() {
     let { loading, contacts } = this.props;
-    if(loading || !this.state.initialized)
+    if(!this.state.initialized)
         return <Loading />
     
     if(!contacts)
@@ -189,7 +198,7 @@ class ManageGroups extends Component {
             {(contacts && contacts.length > 0) &&
               <List>
                 {contacts.map((el, i) => 
-                  <ListItem thumbnail key={el.number + i} button={true} onPress={this.handleAddMember.bind(this, el.number)} >
+                  <ListItem thumbnail key={el.number + i} button={true} onPress={() => this.handleAddMember(el.number)} >
                     <Left>
                         <Thumbnail square source={{ uri: 'https://img.icons8.com/bubbles/100/000000/user.png' }} />
                     </Left>
@@ -232,7 +241,8 @@ function mapDispathToProps(dispatch) {
     trips: state.trips,
     contacts: state.users ? state.users.contacts ? state.users.contacts : null : null,
     users: state.users,
-    loading: state.trips.loading || state.users.loading
+    loading: state.trips.loading || state.users.loading,
+    username: state.identity ? state.identity.username : false
   });
   
 

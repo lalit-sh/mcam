@@ -75,7 +75,6 @@ class Trips extends Component {
 
   render() {
     let { trips, loading } = this.props.trips;
-    loading = true;
     // if(loading)
         // return <Loading />
     

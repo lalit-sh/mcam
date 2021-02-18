@@ -28,7 +28,7 @@ export const getStoragePath = () => {
 export const getAppStoragePath = (p) => {
     let x = `${getStoragePath()}/${config.LOCAL_STORAGE_PATH}`;
     if(p)
-        return `${x}/p`;
+        return `${x}/${p}`;
     return x;
 }
 
@@ -68,5 +68,9 @@ export const stripFilePathPrefix = (pathStr) => {
   }
 
 export const moveFile = async (frompPath, toPath) => {
-    return await RNFS.moveFile(stripFilePathPrefix(frompPath), toPath);
+    try{
+        return await RNFS.moveFile(stripFilePathPrefix(frompPath), toPath);
+    }catch(err){
+        console.log(`Error while moving the file from ${frompPath} to ${toPath}`, err);
+    }
 }

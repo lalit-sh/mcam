@@ -6,7 +6,7 @@
 	objectVersion = 46;
 	objects = {
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* momentzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* momentzTests.m */; };
+		00E356F31AD99517003FC87E /* mcamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mcamTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -14,30 +14,14 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* momentzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* momentzTests.m */; };
-		959A2CDE2C28627E30807580 /* libPods-momentzTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A09D1C6BCEA2689BDD7ABC /* libPods-momentzTests.a */; };
-		9D72211E7187D5A1CD7C3D4D /* libPods-momentz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DDEE3A7E1D7340AEB83A91E /* libPods-momentz.a */; };
-		DEFF4DBAE9F1F82466AD00B5 /* libPods-momentz-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FEDF505152BC52695E3920 /* libPods-momentz-tvOS.a */; };
-		FF580298E3D31C9AE11FBF9A /* libPods-momentz-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44803CD2AAA346A66D6A5FFE /* libPods-momentz-tvOSTests.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* mcamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mcamTests.m */; };
+		959A2CDE2C28627E30807580 /* libPods-mcamTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A09D1C6BCEA2689BDD7ABC /* libPods-mcamTests.a */; };
+		9D72211E7187D5A1CD7C3D4D /* libPods-mcam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DDEE3A7E1D7340AEB83A91E /* libPods-mcam.a */; };
+		DEFF4DBAE9F1F82466AD00B5 /* libPods-mcam-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FEDF505152BC52695E3920 /* libPods-mcam-tvOS.a */; };
+		FF580298E3D31C9AE11FBF9A /* libPods-mcam-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44803CD2AAA346A66D6A5FFE /* libPods-mcam-tvOSTests.a */; };
 		6B9023EBFB26499ABE1ECE4A /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7643C1ED9D104AEE867B514B /* Roboto_medium.ttf */; };
 		1133833413BC484C801BF5A2 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48CCE6D500694F7E832A6CE6 /* Roboto.ttf */; };
 		AAB82C4C52754799B0F23849 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9C90EBFE4481F9736356E /* rubicon-icon-font.ttf */; };
-		CE6A71B045FB48A7A5665270 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D92C399DD7C6492987CA7A9A /* AntDesign.ttf */; };
-		98FF805AD9F24CB9B1424E7B /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11E5DFE6953E4D4E83B49DB7 /* Entypo.ttf */; };
-		270BAED337FE42A5A5C0DBB7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31260E9F766A406C83C0D7AC /* EvilIcons.ttf */; };
-		8D344D476AD44916B2F75BF4 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F03E88235C3C48A1BA5982CD /* Feather.ttf */; };
-		16D1485BAFC4417DBE7C66DE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5903DDDD289D4EF695E9EEB7 /* FontAwesome.ttf */; };
-		0E59FA3886F3471482F64A38 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C50E0090D3304C8281834BB1 /* FontAwesome5_Brands.ttf */; };
-		E16398A196AC4A11B952DB84 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4737AF47633645B69A57B904 /* FontAwesome5_Regular.ttf */; };
-		B0E15D0556D04469A90136B0 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F36158CAD494C3581AA2CC2 /* FontAwesome5_Solid.ttf */; };
-		24F1F05DCAC8495D8625C0F7 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2A21C87DCFA4B30A051B56B /* Fontisto.ttf */; };
-		EA235A55D3414BDBBBE4C4C7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1ECCFF49EE434DED83E63236 /* Foundation.ttf */; };
-		79E21E066F5940B8A3190DC0 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3D4FE0BE4D94040AD4751C8 /* Ionicons.ttf */; };
-		A99635CB1ABE435097045B1D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5019725D8EBE4839BCC190A8 /* MaterialCommunityIcons.ttf */; };
-		BD1D901223454B658B1E0016 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9025A1F5A0EB4EEE9DFF5B8F /* MaterialIcons.ttf */; };
-		6850B9555EDC4CA19232FDAF /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1FAFDE6478F4DA6AD3A9949 /* Octicons.ttf */; };
-		AD23B990EFF54CDB8381FE11 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96E53351290F41CCB684436E /* SimpleLineIcons.ttf */; };
-		825B71B85E924FCDBA5412C1 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 411EF7F4B5164EC4B51317E6 /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,64 +30,48 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = momentz;
+			remoteInfo = mcam;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "momentz-tvOS";
+			remoteInfo = "mcam-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* momentzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = momentzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* mcamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mcamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* momentzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = momentzTests.m; sourceTree = "<group>"; };
-		0D0047539C56B5569735286B /* Pods-momentz-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentz-tvOS.release.xcconfig"; path = "Target Support Files/Pods-momentz-tvOS/Pods-momentz-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* momentz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = momentz.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = momentz/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = momentz/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* mcamTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mcamTests.m; sourceTree = "<group>"; };
+		0D0047539C56B5569735286B /* Pods-mcam-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcam-tvOS.release.xcconfig"; path = "Target Support Files/Pods-mcam-tvOS/Pods-mcam-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* mcam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mcam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = mcam/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = mcam/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = momentz/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = momentz/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = momentz/main.m; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* momentz-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "momentz-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* momentz-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "momentz-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		313C92A42B395C1DD9170708 /* Pods-momentzTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentzTests.release.xcconfig"; path = "Target Support Files/Pods-momentzTests/Pods-momentzTests.release.xcconfig"; sourceTree = "<group>"; };
-		44803CD2AAA346A66D6A5FFE /* libPods-momentz-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-momentz-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		46538902D29054A3ADC668BC /* Pods-momentz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentz.debug.xcconfig"; path = "Target Support Files/Pods-momentz/Pods-momentz.debug.xcconfig"; sourceTree = "<group>"; };
-		6F0AE3CAFA815A6DDDAF3932 /* Pods-momentz-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentz-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-momentz-tvOSTests/Pods-momentz-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7DDEE3A7E1D7340AEB83A91E /* libPods-momentz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-momentz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96FEDF505152BC52695E3920 /* libPods-momentz-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-momentz-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAC13F23053DADB99967DFEE /* Pods-momentz-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentz-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-momentz-tvOSTests/Pods-momentz-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		C075C013A39BC357F890F7BC /* Pods-momentz-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentz-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-momentz-tvOS/Pods-momentz-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		CFD552BC5F5690543D017D7F /* Pods-momentz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentz.release.xcconfig"; path = "Target Support Files/Pods-momentz/Pods-momentz.release.xcconfig"; sourceTree = "<group>"; };
-		D2A09D1C6BCEA2689BDD7ABC /* libPods-momentzTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-momentzTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = mcam/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = mcam/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = mcam/main.m; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* mcam-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mcam-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* mcam-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mcam-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		313C92A42B395C1DD9170708 /* Pods-mcamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcamTests.release.xcconfig"; path = "Target Support Files/Pods-mcamTests/Pods-mcamTests.release.xcconfig"; sourceTree = "<group>"; };
+		44803CD2AAA346A66D6A5FFE /* libPods-mcam-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mcam-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46538902D29054A3ADC668BC /* Pods-mcam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcam.debug.xcconfig"; path = "Target Support Files/Pods-mcam/Pods-mcam.debug.xcconfig"; sourceTree = "<group>"; };
+		6F0AE3CAFA815A6DDDAF3932 /* Pods-mcam-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcam-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-mcam-tvOSTests/Pods-mcam-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7DDEE3A7E1D7340AEB83A91E /* libPods-mcam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mcam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96FEDF505152BC52695E3920 /* libPods-mcam-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mcam-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAC13F23053DADB99967DFEE /* Pods-mcam-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcam-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-mcam-tvOSTests/Pods-mcam-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		C075C013A39BC357F890F7BC /* Pods-mcam-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcam-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-mcam-tvOS/Pods-mcam-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CFD552BC5F5690543D017D7F /* Pods-mcam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcam.release.xcconfig"; path = "Target Support Files/Pods-mcam/Pods-mcam.release.xcconfig"; sourceTree = "<group>"; };
+		D2A09D1C6BCEA2689BDD7ABC /* libPods-mcamTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mcamTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		FF8B92184FA6868C3C45AE02 /* Pods-momentzTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-momentzTests.debug.xcconfig"; path = "Target Support Files/Pods-momentzTests/Pods-momentzTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF8B92184FA6868C3C45AE02 /* Pods-mcamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mcamTests.debug.xcconfig"; path = "Target Support Files/Pods-mcamTests/Pods-mcamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7643C1ED9D104AEE867B514B /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		48CCE6D500694F7E832A6CE6 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		7CE9C90EBFE4481F9736356E /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D92C399DD7C6492987CA7A9A /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		11E5DFE6953E4D4E83B49DB7 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		31260E9F766A406C83C0D7AC /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F03E88235C3C48A1BA5982CD /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5903DDDD289D4EF695E9EEB7 /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C50E0090D3304C8281834BB1 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4737AF47633645B69A57B904 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5F36158CAD494C3581AA2CC2 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F2A21C87DCFA4B30A051B56B /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1ECCFF49EE434DED83E63236 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F3D4FE0BE4D94040AD4751C8 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5019725D8EBE4839BCC190A8 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9025A1F5A0EB4EEE9DFF5B8F /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C1FAFDE6478F4DA6AD3A9949 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		96E53351290F41CCB684436E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		411EF7F4B5164EC4B51317E6 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				959A2CDE2C28627E30807580 /* libPods-momentzTests.a in Frameworks */,
+				959A2CDE2C28627E30807580 /* libPods-mcamTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D72211E7187D5A1CD7C3D4D /* libPods-momentz.a in Frameworks */,
+				9D72211E7187D5A1CD7C3D4D /* libPods-mcam.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEFF4DBAE9F1F82466AD00B5 /* libPods-momentz-tvOS.a in Frameworks */,
+				DEFF4DBAE9F1F82466AD00B5 /* libPods-mcam-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,20 +103,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF580298E3D31C9AE11FBF9A /* libPods-momentz-tvOSTests.a in Frameworks */,
+				FF580298E3D31C9AE11FBF9A /* libPods-mcam-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* momentzTests */ = {
+		00E356EF1AD99517003FC87E /* mcamTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* momentzTests.m */,
+				00E356F21AD99517003FC87E /* mcamTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = momentzTests;
+			path = mcamTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -159,7 +127,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* momentz */ = {
+		13B07FAE1A68108700A75B9A /* mcam */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -170,7 +138,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = momentz;
+			name = mcam;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -178,10 +146,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				7DDEE3A7E1D7340AEB83A91E /* libPods-momentz.a */,
-				96FEDF505152BC52695E3920 /* libPods-momentz-tvOS.a */,
-				44803CD2AAA346A66D6A5FFE /* libPods-momentz-tvOSTests.a */,
-				D2A09D1C6BCEA2689BDD7ABC /* libPods-momentzTests.a */,
+				7DDEE3A7E1D7340AEB83A91E /* libPods-mcam.a */,
+				96FEDF505152BC52695E3920 /* libPods-mcam-tvOS.a */,
+				44803CD2AAA346A66D6A5FFE /* libPods-mcam-tvOSTests.a */,
+				D2A09D1C6BCEA2689BDD7ABC /* libPods-mcamTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -196,9 +164,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* momentz */,
+				13B07FAE1A68108700A75B9A /* mcam */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* momentzTests */,
+				00E356EF1AD99517003FC87E /* mcamTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E61295C3CE624EBA6724F1BE /* Pods */,
@@ -212,10 +180,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* momentz.app */,
-				00E356EE1AD99517003FC87E /* momentzTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* momentz-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* momentz-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* mcam.app */,
+				00E356EE1AD99517003FC87E /* mcamTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* mcam-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* mcam-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -223,14 +191,14 @@
 		E61295C3CE624EBA6724F1BE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				46538902D29054A3ADC668BC /* Pods-momentz.debug.xcconfig */,
-				CFD552BC5F5690543D017D7F /* Pods-momentz.release.xcconfig */,
-				C075C013A39BC357F890F7BC /* Pods-momentz-tvOS.debug.xcconfig */,
-				0D0047539C56B5569735286B /* Pods-momentz-tvOS.release.xcconfig */,
-				6F0AE3CAFA815A6DDDAF3932 /* Pods-momentz-tvOSTests.debug.xcconfig */,
-				AAC13F23053DADB99967DFEE /* Pods-momentz-tvOSTests.release.xcconfig */,
-				FF8B92184FA6868C3C45AE02 /* Pods-momentzTests.debug.xcconfig */,
-				313C92A42B395C1DD9170708 /* Pods-momentzTests.release.xcconfig */,
+				46538902D29054A3ADC668BC /* Pods-mcam.debug.xcconfig */,
+				CFD552BC5F5690543D017D7F /* Pods-mcam.release.xcconfig */,
+				C075C013A39BC357F890F7BC /* Pods-mcam-tvOS.debug.xcconfig */,
+				0D0047539C56B5569735286B /* Pods-mcam-tvOS.release.xcconfig */,
+				6F0AE3CAFA815A6DDDAF3932 /* Pods-mcam-tvOSTests.debug.xcconfig */,
+				AAC13F23053DADB99967DFEE /* Pods-mcam-tvOSTests.release.xcconfig */,
+				FF8B92184FA6868C3C45AE02 /* Pods-mcamTests.debug.xcconfig */,
+				313C92A42B395C1DD9170708 /* Pods-mcamTests.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -242,22 +210,6 @@
 				7643C1ED9D104AEE867B514B /* Roboto_medium.ttf */,
 				48CCE6D500694F7E832A6CE6 /* Roboto.ttf */,
 				7CE9C90EBFE4481F9736356E /* rubicon-icon-font.ttf */,
-				D92C399DD7C6492987CA7A9A /* AntDesign.ttf */,
-				11E5DFE6953E4D4E83B49DB7 /* Entypo.ttf */,
-				31260E9F766A406C83C0D7AC /* EvilIcons.ttf */,
-				F03E88235C3C48A1BA5982CD /* Feather.ttf */,
-				5903DDDD289D4EF695E9EEB7 /* FontAwesome.ttf */,
-				C50E0090D3304C8281834BB1 /* FontAwesome5_Brands.ttf */,
-				4737AF47633645B69A57B904 /* FontAwesome5_Regular.ttf */,
-				5F36158CAD494C3581AA2CC2 /* FontAwesome5_Solid.ttf */,
-				F2A21C87DCFA4B30A051B56B /* Fontisto.ttf */,
-				1ECCFF49EE434DED83E63236 /* Foundation.ttf */,
-				F3D4FE0BE4D94040AD4751C8 /* Ionicons.ttf */,
-				5019725D8EBE4839BCC190A8 /* MaterialCommunityIcons.ttf */,
-				9025A1F5A0EB4EEE9DFF5B8F /* MaterialIcons.ttf */,
-				C1FAFDE6478F4DA6AD3A9949 /* Octicons.ttf */,
-				96E53351290F41CCB684436E /* SimpleLineIcons.ttf */,
-				411EF7F4B5164EC4B51317E6 /* Zocial.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -266,9 +218,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* momentzTests */ = {
+		00E356ED1AD99517003FC87E /* mcamTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "momentzTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "mcamTests" */;
 			buildPhases = (
 				7539B3B034189F1FE3C54CA1 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -280,14 +232,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = momentzTests;
-			productName = momentzTests;
-			productReference = 00E356EE1AD99517003FC87E /* momentzTests.xctest */;
+			name = mcamTests;
+			productName = mcamTests;
+			productReference = 00E356EE1AD99517003FC87E /* mcamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* momentz */ = {
+		13B07F861A680F5B00A75B9A /* mcam */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "momentz" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "mcam" */;
 			buildPhases = (
 				6D39F188D9D3EEA8BF372F44 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -300,14 +252,14 @@
 			);
 			dependencies = (
 			);
-			name = momentz;
-			productName = momentz;
-			productReference = 13B07F961A680F5B00A75B9A /* momentz.app */;
+			name = mcam;
+			productName = mcam;
+			productReference = 13B07F961A680F5B00A75B9A /* mcam.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* momentz-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* mcam-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "momentz-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mcam-tvOS" */;
 			buildPhases = (
 				D3A55330CDDF6B0A328F9348 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -320,14 +272,14 @@
 			);
 			dependencies = (
 			);
-			name = "momentz-tvOS";
-			productName = "momentz-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* momentz-tvOS.app */;
+			name = "mcam-tvOS";
+			productName = "mcam-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* mcam-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* momentz-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* mcam-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "momentz-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mcam-tvOSTests" */;
 			buildPhases = (
 				BD8367B58151C2B60637A1A1 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -339,9 +291,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "momentz-tvOSTests";
-			productName = "momentz-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* momentz-tvOSTests.xctest */;
+			name = "mcam-tvOSTests";
+			productName = "mcam-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* mcam-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -368,7 +320,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "momentz" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "mcam" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -381,10 +333,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* momentz */,
-				00E356ED1AD99517003FC87E /* momentzTests */,
-				2D02E47A1E0B4A5D006451C7 /* momentz-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* momentz-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* mcam */,
+				00E356ED1AD99517003FC87E /* mcamTests */,
+				2D02E47A1E0B4A5D006451C7 /* mcam-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* mcam-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -406,22 +358,6 @@
 				6B9023EBFB26499ABE1ECE4A /* Roboto_medium.ttf in Resources */,
 				1133833413BC484C801BF5A2 /* Roboto.ttf in Resources */,
 				AAB82C4C52754799B0F23849 /* rubicon-icon-font.ttf in Resources */,
-				CE6A71B045FB48A7A5665270 /* AntDesign.ttf in Resources */,
-				98FF805AD9F24CB9B1424E7B /* Entypo.ttf in Resources */,
-				270BAED337FE42A5A5C0DBB7 /* EvilIcons.ttf in Resources */,
-				8D344D476AD44916B2F75BF4 /* Feather.ttf in Resources */,
-				16D1485BAFC4417DBE7C66DE /* FontAwesome.ttf in Resources */,
-				0E59FA3886F3471482F64A38 /* FontAwesome5_Brands.ttf in Resources */,
-				E16398A196AC4A11B952DB84 /* FontAwesome5_Regular.ttf in Resources */,
-				B0E15D0556D04469A90136B0 /* FontAwesome5_Solid.ttf in Resources */,
-				24F1F05DCAC8495D8625C0F7 /* Fontisto.ttf in Resources */,
-				EA235A55D3414BDBBBE4C4C7 /* Foundation.ttf in Resources */,
-				79E21E066F5940B8A3190DC0 /* Ionicons.ttf in Resources */,
-				A99635CB1ABE435097045B1D /* MaterialCommunityIcons.ttf in Resources */,
-				BD1D901223454B658B1E0016 /* MaterialIcons.ttf in Resources */,
-				6850B9555EDC4CA19232FDAF /* Octicons.ttf in Resources */,
-				AD23B990EFF54CDB8381FE11 /* SimpleLineIcons.ttf in Resources */,
-				825B71B85E924FCDBA5412C1 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +422,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-momentz-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-mcam-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -508,7 +444,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-momentzTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-mcamTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -530,7 +466,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-momentz-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-mcam-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -552,7 +488,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-momentz-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-mcam-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -604,7 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* momentzTests.m in Sources */,
+				00E356F31AD99517003FC87E /* mcamTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* momentzTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* mcamTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,12 +575,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* momentz */;
+			target = 13B07F861A680F5B00A75B9A /* mcam */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* momentz-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* mcam-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -656,7 +592,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = momentz;
+			path = mcam;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -664,14 +600,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF8B92184FA6868C3C45AE02 /* Pods-momentzTests.debug.xcconfig */;
+			baseConfigurationReference = FF8B92184FA6868C3C45AE02 /* Pods-mcamTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = momentzTests/Info.plist;
+				INFOPLIST_FILE = mcamTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -681,17 +617,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/momentz.app/momentz";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mcam.app/mcam";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 313C92A42B395C1DD9170708 /* Pods-momentzTests.release.xcconfig */;
+			baseConfigurationReference = 313C92A42B395C1DD9170708 /* Pods-mcamTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = momentzTests/Info.plist;
+				INFOPLIST_FILE = mcamTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -701,18 +637,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/momentz.app/momentz";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mcam.app/mcam";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46538902D29054A3ADC668BC /* Pods-momentz.debug.xcconfig */;
+			baseConfigurationReference = 46538902D29054A3ADC668BC /* Pods-mcam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = momentz/Info.plist;
+				INFOPLIST_FILE = mcam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -720,18 +656,18 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = momentz;
+				PRODUCT_NAME = mcam;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFD552BC5F5690543D017D7F /* Pods-momentz.release.xcconfig */;
+			baseConfigurationReference = CFD552BC5F5690543D017D7F /* Pods-mcam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = momentz/Info.plist;
+				INFOPLIST_FILE = mcam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -739,14 +675,14 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = momentz;
+				PRODUCT_NAME = mcam;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C075C013A39BC357F890F7BC /* Pods-momentz-tvOS.debug.xcconfig */;
+			baseConfigurationReference = C075C013A39BC357F890F7BC /* Pods-mcam-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -757,14 +693,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "momentz-tvOS/Info.plist";
+				INFOPLIST_FILE = "mcam-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.momentz-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mcam-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -774,7 +710,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D0047539C56B5569735286B /* Pods-momentz-tvOS.release.xcconfig */;
+			baseConfigurationReference = 0D0047539C56B5569735286B /* Pods-mcam-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -785,14 +721,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "momentz-tvOS/Info.plist";
+				INFOPLIST_FILE = "mcam-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.momentz-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mcam-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -802,7 +738,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F0AE3CAFA815A6DDDAF3932 /* Pods-momentz-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 6F0AE3CAFA815A6DDDAF3932 /* Pods-mcam-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -812,24 +748,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "momentz-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "mcam-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.momentz-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mcam-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/momentz-tvOS.app/momentz-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mcam-tvOS.app/mcam-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAC13F23053DADB99967DFEE /* Pods-momentz-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = AAC13F23053DADB99967DFEE /* Pods-mcam-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -839,17 +775,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "momentz-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "mcam-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.momentz-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mcam-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/momentz-tvOS.app/momentz-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mcam-tvOS.app/mcam-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -956,7 +892,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "momentzTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "mcamTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -965,7 +901,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "momentz" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "mcam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -974,7 +910,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "momentz-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mcam-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -983,7 +919,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "momentz-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mcam-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -992,7 +928,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "momentz" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "mcam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

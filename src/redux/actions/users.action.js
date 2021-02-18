@@ -65,7 +65,7 @@ export const syncUserContacts = (con) => (dispatch, getState) => {
         if( resp && resp.data){
             let c=con.map(el => {
                 el["isActive"] = false;
-                if(resp.data.some(l => l == el)) el["isActive"] = true;
+                if(resp.data.some(l => l == el.number || el)) el["isActive"] = true;
                 return el;
             })
             dispatch({

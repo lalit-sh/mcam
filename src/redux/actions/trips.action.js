@@ -64,6 +64,7 @@ export const updateTrip = (tripName, data) => (dispatch, getState) => {
     dispatch(started());
     service.updateTrip(tripName, data, getToken(getState))
     .then(resp => {
+        console.log("updateTrip resp", resp);
         if(resp && resp.data){
             getTrips()(dispatch, getState);;
         }else{
@@ -110,6 +111,10 @@ export const markTripActive = (trip) => (dispatch, getState) => {
     dispatch(setActiveTrip(trip));
     // setActiveTripToStorage(trip);
 }
+
+export const shareImageWithGroup = (image, trip) => (dispatch, getState) => {
+    
+} 
 
 // const setActiveTripToStorage = async trip => {
 //     try{

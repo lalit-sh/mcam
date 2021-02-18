@@ -11,7 +11,8 @@ import {
     getFileName,
     getAppStoragePath,
     upsertDirectory,
-    moveFile
+    moveFile,
+    getStoragePermission
 } from "../../utils/helpers/localStorageHelpers";
 import { 
     uploadImage
@@ -23,15 +24,22 @@ import {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.activeTrip = this.getActiveTrip();
   }
+
+  componentDidMount = async () => {
+    getStoragePermission()
+    this.activeTrip = await this.getActiveTrip();
+  }
+  
 
   getActiveTrip = async () => {
     try{
-        this.activeTrip = this.props.activeTrip;
-        if(this.activeTrip && typeof this.activeTrip == 'string'){
-            this.activeTrip = JSON.parse(this.activeTrip);
-            return this.activeTrip;
+        let activeTrip = this.props.activeTrip;
+        console.log(activeTrip)
+        if(activeTrip){
+            if(typeof activeTrip == 'string')
+              activeTrip = JSON.parse(activeTrip);
+            return activeTrip;
         }
         return null;
     }catch(error){
@@ -48,9 +56,9 @@ class Home extends Component {
   
 
   noActiveTripDialog(){
-    Alert.alert(null,`Seems like you have don't have any active trip. Please select an active trip to click and share image.`, [
+    Alert.alert(null,`Seems like you have don't have any active group. Please select an active group to click and share image.`, [
         {
-            text: 'Trips',
+            text: 'Groups',
             onPress: () => {
                 this.props.navigation.navigate("Trips");
             }
@@ -75,21 +83,18 @@ class Home extends Component {
     }
     const filename = getFileName();
     const storagePath = getAppStoragePath(this.activeTrip.name);
-    
     const fullFilePath = `${storagePath}/${filename}`;
     upsertDirectory(storagePath);
     moveFile(uri, fullFilePath);
-    uploadImage(fullFilePath, this.getFileNameForS3Upload(filename), (evt) => {
-        let uploaded = parseInt((evt.loaded * 100) / evt.total);
-        console.log("Uploaded :: " + uploaded +'%');
-    }, (err, data) => {
-        if(err){
-            this._toast.current.show(`Unable to upload ${filename}`);
-            console.log(`Unable to upload ${filename}`, error);
-        }
-        console.log(`uploaded successfully ${filename}`, data);
-        newImageEvent(filename, data.Location, this.activeTrip);
-    });
+    // uploadImage(fullFilePath, this.getFileNameForS3Upload(filename), (evt) => {
+    //     let uploaded = parseInt((evt.loaded * 100) / evt.total);
+    //     console.log("Uploaded :: " + uploaded +'%');
+    // }, (err, data) => {
+    //     if(err){
+    //         this._toast.current.show(`Unable to upload ${filename}`);
+    //     }
+    //     newImageEvent(filename, data.Location, this.activeTrip);
+    // });
 
   }
 
@@ -100,6 +105,7 @@ class Home extends Component {
           <Camera 
             onClick={this.handleClick}
             navigation={this.props.navigation}
+            activeTrip={this.activeTrip}
           />
       </Container>
     );

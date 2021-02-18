@@ -1,4 +1,4 @@
-package com.momentz;
+package com.mocam;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

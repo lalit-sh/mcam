@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View} from 'react-native';
+import { View, Image } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { cameraStyle as styles } from "../style";
 import Footer from "./Footer";
@@ -65,6 +65,7 @@ class Camera extends PureComponent {
                     base64: false
                 }
                 const data = await this._camera.takePictureAsync(options);
+                this.setPreview(data.uri);
                 if(this.props.onClick){
                     this.props.onClick(data.uri);
                 }else{
@@ -77,7 +78,6 @@ class Camera extends PureComponent {
     }
 
     onGallery = () => {
-        console.log("oka")
         const options = {
             title: 'Select Avatar',
             customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
@@ -88,7 +88,7 @@ class Camera extends PureComponent {
           };
         ImagePicker.launchImageLibrary(options, (response) => {
             // Same code as in above section!
-          });
+        });
     }
 
     changeCamera = () => {
@@ -131,11 +131,14 @@ class Camera extends PureComponent {
             console.log("Error in prepareRatio", err)
         }
     }
-    getPreviewHeight = () => {
+    getCameraViewHeight = () => {
         let {width, height} = Dimensions.get('window');
+        return this.getHeightForRatio(height, width, this.state.ratio);
+    }
+
+    getHeightForRatio = (height, width, ratio) => {
         let hght = height;
-        let ratio = this.state.ratio;
-            ratio = ratio.split(":")
+        ratio = ratio.split(":")
         let h = ratio[0]
         let w = ratio[1]
         hght = (h*width/w);
@@ -144,8 +147,32 @@ class Camera extends PureComponent {
         return hght;
     }
 
+    getPreviewDimensions = () => {
+        let {width, height} = Dimensions.get('window');
+        width = width - (width / 100) * 50;
+        let h = this.getHeightForRatio(height, width, this.state.ratio);
+        return {width, height: h};
+    }
+
+    setPreview = img => {
+        if(!this.state.previewUri && this.props.activeTrip && this.props.activeTrip.name){
+            let previewTimeOut = 3000;
+            this.setState({
+                previewUri: img
+            });
+
+            setTimeout(() => {
+                this.setState({
+                    previewUri: null
+                })
+            }, previewTimeOut)
+        }
+    }
+
     render() {
-        let height = this.getPreviewHeight();
+        let height = this.getCameraViewHeight();
+        let previewDimensions = this.getPreviewDimensions();
+        let previewImage = this.state.previewUri;
         return (
             <View style={styles.container}>
                 <Header 
@@ -156,6 +183,11 @@ class Camera extends PureComponent {
                     onRatioChange = {this.prepareRatio} 
                     ratio = {(this.state.ratio == "16:9" || this.state.ratio == "19:9") ? "FULL_SCREEN" : this.state.ratio}
                 />
+                {previewImage &&
+                    <View style={styles.previewContainer}>
+                        <Image source={{width: previewDimensions.width, height: previewDimensions.height, uri: previewImage}} style={styles.preview}/>
+                    </View>
+                }
                 <RNCamera
                     ratio={this.state.ratio}
                     ref={(ref) => {
@@ -163,7 +195,7 @@ class Camera extends PureComponent {
                     }}
                     style={{
                         height: height
-                      }}
+                    }}
                     type={this.getCameraType()}
                     flashMode={this.getFlash()}
                     playSoundOnCapture={true}
