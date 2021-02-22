@@ -62,7 +62,7 @@ class ManageGroups extends Component {
             }
           );
           if(rp == 'never_ask_again'){
-            return Alert.alert("Allow Permission", "Contacts Read Permission is required. Goto: Settings->Apps->momentz->Permissions and allow contacts permission.",  [
+            return Alert.alert("Allow Permission", "Contacts Read Permission is required. Goto: Settings->Apps->mcam->Permissions and allow contacts permission.",  [
               {
                 text: "Cancel",
                 onPress: () => RNExitApp.exitApp(),

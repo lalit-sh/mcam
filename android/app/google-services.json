@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1059154164937:android:5a0b4adecfb785bcfc2118",
+        "mobilesdk_app_id": "1:1059154164937:android:d3e0328288c62abffc2118",
         "android_client_info": {
-          "package_name": "com.mocam"
+          "package_name": "com.mcam"
         }
       },
       "oauth_client": [
