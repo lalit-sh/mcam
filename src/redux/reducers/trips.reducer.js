@@ -20,17 +20,25 @@ const initialState = {
 
 
 const tripsReducer = (state = initialState, action) => {
+    let trips, activeTrip;
     switch (action.type) {
         case PROCESS_TRIP_STARTED:
             return {
-                 ...state,
-                 loading: true
+                ...state,
+                loading: true
             }
         case GET_TRIP_SUCCESS:
+            activeTrip = state.activeTrip;
+            trips = [...action.payload];
+            if(activeTrip && activeTrip._id){
+                activeTrip = trips.find(el => el._id == activeTrip._id);
+            }
+
             return {
                 ...state,
                 loading: false,
-                trips: action.payload
+                trips: trips,
+                activeTrip: activeTrip || null
             }
         case PROCESS_TRIP_FAILED:
             return {
@@ -56,7 +64,7 @@ const tripsReducer = (state = initialState, action) => {
                 loading: false
             }
         case NEW_GROUP_ADDED:
-            let trips = [], activeTrip = state.activeTrip;
+            trips = [], activeTrip = state.activeTrip;
             if(!state.trips || state.trips.length == 0)
                 activeTrip = action.payload;
             if(state.trips && state.trips.length)

@@ -14,8 +14,8 @@ const persistConfig = {
 const middleware = [thunk, logger];
 const persistedReducer = persistReducer(persistConfig, reducers);
 
+export const store = createStore(persistedReducer, applyMiddleware(...middleware));
+export const persistor = persistStore(store);
 export default () => {
-    let store = createStore(persistedReducer, applyMiddleware(...middleware));
-    let persistor = persistStore(store);
     return { store, persistor};
 };

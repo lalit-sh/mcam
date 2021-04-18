@@ -65,7 +65,7 @@ export const getFileName = () => {
 export const stripFilePathPrefix = (pathStr) => {
     if (pathStr.startsWith('file://')) return pathStr.replace(/^file:\/\//, '');
     return pathStr;
-  }
+}
 
 export const moveFile = async (frompPath, toPath) => {
     try{

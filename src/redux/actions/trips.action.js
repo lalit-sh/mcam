@@ -76,11 +76,29 @@ export const updateTrip = (tripName, data) => (dispatch, getState) => {
     })
 };
 
+export const manageMembersToGroup = ({groupName, member, addMember}) => (dispatch, getState) => {
+    dispatch(started());
+    service.manageMembersToGroup({groupName, member, addMember}, getToken(getState))
+    .then(resp => {
+        console.log("updateTrip resp", resp);
+        if(resp && resp.data){
+            getTrips()(dispatch, getState);;
+        }else{
+            dispatch(failure(resp.data && resp.data.message || "Something went wrong"));
+        }
+    })
+    .catch(err => {
+        console.log('err', err, err.response)
+        dispatch(failure("Something went wrong"));
+    })
+}
+
 export const getTrips = (tripName = null) => (dispatch, getState) => {
     dispatch(started());
-    service.getTrips(tripName, getToken(getState))
+    service.getUserTrips(getToken(getState))
     .then(resp => {
         if(resp && resp.data){
+            console.log("resp.data",resp.data);
             dispatch(success(resp.data));
         }else{
             dispatch(failure(resp.data.message));
@@ -112,8 +130,14 @@ export const markTripActive = (trip) => (dispatch, getState) => {
     // setActiveTripToStorage(trip);
 }
 
-export const shareImageWithGroup = (image, trip) => (dispatch, getState) => {
-    
+export const shareImageWithGroup = (data) => (dispatch, getState) => {
+    service.shareNewImage(data, getToken(getState))
+    .then(resp => {
+        console.log("resp", resp);
+    })
+    .catch(err => {
+        console.log("err", err);
+    })
 } 
 
 // const setActiveTripToStorage = async trip => {

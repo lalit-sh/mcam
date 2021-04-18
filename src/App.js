@@ -5,10 +5,12 @@ import Navigation from "./utils/routes";
 import Store from "./redux/store";
 import Loading from "./shared/Loading";
 import { MenuProvider } from 'react-native-popup-menu';
+import { firebaseBackgroundMessage } from "./utils/BackgroundFBMessage";
+import { AppRegistry } from "react-native"; 
 
 const { store, persistor } = Store();
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
       super(props);
   }
@@ -25,3 +27,7 @@ export default class App extends Component {
     );
   }
 }
+
+AppRegistry.registerComponent('ReactNativeFirebaseDemo', () => App);
+AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => firebaseBackgroundMessage.bind(null, store)); 
+export default App;

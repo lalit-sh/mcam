@@ -5,15 +5,21 @@ import {
             CLEAR_ERROR,
             LOGOUT
         } from "../../utils/constants/identity.constants";
+import {
+    ACCESS_TOKEN
+} from "../../utils/constants/common.constants";
 import { 
             UNKOWN_ERROR
         } from "../../utils/constants/error.constants";
 import * as service from "../services/identity.service";
+import AsyncStorage from "@react-native-community/async-storage";
 
-const authSuccess = payload => ({
-    type: AUTH_SUCCESS,
-    payload: payload
-});
+const authSuccess = payload => {
+    return ({
+        type: AUTH_SUCCESS,
+        payload: payload
+    })
+};
 
 const authFailed = payload => ({
     type: AUTH_FAILED,
@@ -28,9 +34,10 @@ const authStarted = payload => ({
 export const login = (username, password) => dispatch => {
     dispatch(authStarted());
     service.login(username, password)
-    .then(resp => {
+    .then(async resp => {
         console.log("auth", resp)
         if(resp && resp.data && resp.data.token){
+            await AsyncStorage.setItem(ACCESS_TOKEN, resp.data.token);
             dispatch(authSuccess(Object.assign({}, resp.data, {username})));
         }else{
             dispatch(authFailed(resp.data.message))
@@ -46,9 +53,10 @@ export const login = (username, password) => dispatch => {
 export const signup = ({username, password, name, deviceId}) => dispatch => {
     dispatch(authStarted());
     service.signup({username, password, name, deviceId})
-    .then(resp => {
+    .then(async resp => {
         console.log('signup resp', resp)
         if(resp && resp.data && resp.data.token){
+            await AsyncStorage.setItem(ACCESS_TOKEN, resp.data.token);
             dispatch(authSuccess(Object.assign({}, resp.data, {username})));
         }else{
             dispatch(authFailed(resp.data.message))

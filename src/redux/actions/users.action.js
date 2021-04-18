@@ -60,17 +60,19 @@ export const getUserContacts = () => (dispatch, getState) => {
 
 export const syncUserContacts = (con) => (dispatch, getState) => {
     dispatch(startLoading());
-    service.syncUserContacts(con, getToken(getState))
+    service.syncUserContacts(Object.keys(con), getToken(getState))
     .then(resp => {
         if( resp && resp.data){
-            let c=con.map(el => {
-                el["isActive"] = false;
-                if(resp.data.some(l => l == el.number || el)) el["isActive"] = true;
-                return el;
-            })
+            console.log(resp.data, con)
+            let d = {};
+
+            resp.data.map(el => {
+                d[el.username] = con[el.username]
+            });
+
             dispatch({
                 type: SYNC_USER_CONTACTS,
-                payload: c 
+                payload: d
             });
         }else if(resp.data.message){
             dispatch(failure(resp.data.message));
@@ -82,6 +84,21 @@ export const syncUserContacts = (con) => (dispatch, getState) => {
     });
 }
 
+export const updateFcmToken = (fcmToken) => (dispatch) => {
+    // dispatch(startLoading());
+    service.updateFcmToken(fcmToken)
+    .then(resp => {
+        console.log(resp);
+        // if(resp){
+        //     console.log("success", resp);
+        // }else{
+
+        // }
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
 
 
 
