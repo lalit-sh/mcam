@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from "native-base";
@@ -19,6 +19,7 @@ import {
     uploadImage,
 } from "../../utils/middleware/image";
 import { handleNewDataMessage, updateProgressToNotification, showUploadImageNotification, removeNotification } from "../../utils/helpers/Notification.helpers";
+import Toast from 'react-native-easy-toast';
 
 class Home extends Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class Home extends Component {
             onNewFcmToken: this.handleNewFcmToken,
             onDataMessage: handleNewDataMessage
         });
+        this._toast = createRef()
     }
 
     componentDidMount = async () => {
@@ -105,10 +107,7 @@ class Home extends Component {
             let notification;
             uploadImage(fullFilePath, this.getFileNameForS3Upload(filename), (evt) => {
                 let uploaded = parseInt((evt.loaded * 100) / evt.total);
-                console.log("Uploaded :: " + uploaded +'%');
-                console.log("I am here", notification)
                 if(!notification){
-                    console.log("so I came here")
                     notification = showUploadImageNotification(this.props.activeTrip)
                 }
                 if(notification)
@@ -117,7 +116,8 @@ class Home extends Component {
                 if(notification)
                     removeNotification(notification.notificationId)
                 if(err){
-                    this._toast.current.show(`Unable to upload ${filename}`);
+                    console.log("Error while uploading file", err);
+                    this._toast && this._toast.current.show(`Unable to upload image`);
                 }else{
                     let d = {
                         "imageUrl": data.Location,
@@ -140,6 +140,7 @@ class Home extends Component {
                     navigation={this.props.navigation}
                     activeTrip={this.activeTrip}
                 />
+                <Toast ref={this._toast}/>
             </Container>
         );
     }

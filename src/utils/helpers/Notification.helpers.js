@@ -6,7 +6,8 @@ import {
     getAppStoragePath,
 } from "./localStorageHelpers";
 import PushNotification from "../PushNotification";
-import { store }  from "../../redux/store/index"
+import { store }  from "../../redux/store/index";
+import { S3_OBJECT_PATH } from "../../utils/config";
 
 var getState = store.getState 
 const androidChannelName = PushNotification.getChannel();
@@ -14,7 +15,9 @@ const androidChannelName = PushNotification.getChannel();
 const newImageMessage = (data) => {
     const notification = showNewImageNotification(data);
     const storagePath = getAppStoragePath(data.group);
-    const fullFilePath = `${storagePath}/${data.imageKey}`;
+    let key = data.imageKey;
+    key = key.replace(`${S3_OBJECT_PATH}/`, "sh_");
+    const fullFilePath = `${storagePath}/${key}`;
     downloadImage(data.imageKey, fullFilePath, (progress) => updateProgressToNotification(notification, progress));
 }
 
