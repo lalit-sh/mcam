@@ -6,10 +6,10 @@ import {
   List,
   ListItem,
   Right,
-  Text,
+  Text
 } from 'native-base';
-import React, {Component} from 'react';
-import {logout} from '../../redux/actions/identity.action';
+import React, { Component } from 'react';
+import { logout } from '../../redux/actions/identity.action';
 import Header from '../../shared/Header';
 // import { logout } from "../../redux/actions/identity.action";
 // import { connect } from 'react-redux';
@@ -35,7 +35,7 @@ class SettingModule extends Component {
         <Header {...this.props} title="Settings" isBack={true} />
         <Content style={{top: 30}}>
           <List>
-            <ListItem>
+            <ListItem onPress={this.showSetting}>
               <Body>
                 <Text>Camera Setting</Text>
               </Body>
@@ -44,7 +44,6 @@ class SettingModule extends Component {
                   type="AntDesign"
                   name="right"
                   style={({fontSize: 20}, {color: '#000'})}
-                  onPress={this.showSetting}
                 />
               </Right>
             </ListItem>
@@ -78,7 +77,7 @@ class SettingModule extends Component {
           <ListItem style={{borderBottomWidth: 0}}>
             <Body>
               <Text
-                style={{textAlign: 'center'}}
+                style={{textAlign: 'center', color: "#f00", fontSize: 22, fontWeight: "bold"}}
                 onPress={this.handleLogout.bind(this, logout)}>
                 Logout
               </Text>

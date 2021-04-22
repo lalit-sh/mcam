@@ -1,24 +1,23 @@
+import { Container } from "native-base";
 import React, { Component } from 'react';
+import { Alert, StatusBar } from 'react-native';
+import RNExitApp from 'react-native-exit-app';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container } from "native-base";
-import RNExitApp from 'react-native-exit-app';
-import Camera from "./modules/camera";
-import AsyncStorage from '@react-native-community/async-storage';
-import { Alert, StatusBar } from 'react-native';
+import {
+  getAppStoragePath, getFileName,
 
-import { 
-    getFileName,
-    getAppStoragePath,
-    upsertDirectory,
-    moveFile
+
+  moveFile, upsertDirectory
 } from "../../utils/helpers/localStorageHelpers";
-import { 
-    uploadImage
+import {
+  uploadImage
 } from "../../utils/middleware/image";
-import { 
-    newImageEvent
+import {
+  newImageEvent
 } from "../../utils/middleware/socket";
+import Camera from "./modules/camera";
+
 
 class Home extends Component {
   constructor(props) {
@@ -100,6 +99,7 @@ class Home extends Component {
           <Camera 
             onClick={this.handleClick}
             navigation={this.props.navigation}
+            settings={this.props.settings}
           />
       </Container>
     );
@@ -112,7 +112,8 @@ function mapDispathToProps(dispatch) {
 
 const mapStateToProps = (state) => ({
     identity: state.identity,
-    activeTrip: state.trips.activeTrip || null
+    activeTrip: state.trips.activeTrip || null,
+    settings: state.settings
 });
 
 export default connect(mapStateToProps, mapDispathToProps)(Home);
