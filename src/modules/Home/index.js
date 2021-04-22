@@ -140,6 +140,7 @@ class Home extends Component {
                     onClick={this.handleClick}
                     navigation={this.props.navigation}
                     activeTrip={this.activeTrip}
+                    settings={this.props.settings}
                 />
                 <Toast ref={this._toast}/>
             </Container>

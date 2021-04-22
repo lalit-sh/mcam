@@ -188,6 +188,7 @@ class Camera extends PureComponent {
         let height = this.getCameraViewHeight();
         let previewDimensions = this.getPreviewDimensions();
         let previewImage = this.state.previewUri;
+        console.log("this.props.settings", this.props.settings);
         return (
             <View style={styles.container}>
                 <Header 
@@ -203,8 +204,8 @@ class Camera extends PureComponent {
                         <Image source={{width: previewDimensions.width, height: previewDimensions.height, uri: previewImage}} style={styles.preview}/>
                     </View>
                 }
-                {
-                    this.props.settings.grid && <Grid height = {height} />
+                {(this.props.settings && this.props.settings.grid) &&
+                    <Grid height = {height} />
                 }
                 <RNCamera
                     ratio={this.state.ratio}
