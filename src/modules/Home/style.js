@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native";
-import { Dimensions } from 'react-native'
+import { Dimensions, StyleSheet } from "react-native";
 
 let {width, height} = Dimensions.get('window');
 const bgColor = "rgba(0,0,0,1)";
@@ -39,7 +38,7 @@ export const cameraStyle = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    zIndex: 1
+    zIndex: 2
   },
   headerIconStyle: {
     color: "#fff",
@@ -90,6 +89,16 @@ export const cameraStyle = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.4)"
   }
 });
+
+export const gridStyle = StyleSheet.create({
+  box: {
+    width: 230,
+    height: 230,
+    borderWidth: 0.5,
+    borderColor: "white",
+    flex: 1,
+  }
+})
 
 export const ratioIconStyle = {
   container: {

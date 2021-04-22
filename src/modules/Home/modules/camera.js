@@ -1,12 +1,12 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React, { PureComponent } from 'react';
-import { View, Image } from 'react-native';
+import { Dimensions, Platform, View, Image } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import ImagePicker from 'react-native-image-picker';
 import { cameraStyle as styles } from "../style";
 import Footer from "./Footer";
+import Grid from './Grid';
 import Header from "./Header";
-import ImagePicker from 'react-native-image-picker';
-import { Dimensions } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage';
 
 const cameraPermissionConfig = {
     title: 'Permission to use camera',
@@ -57,6 +57,12 @@ class Camera extends PureComponent {
         return RNCamera.Constants.FlashMode.off;
     }
 
+    getGrid = () => {
+        if(this.state.grid){
+            return this.setState({GridMode: this.state.switchValue});
+        }
+    }
+
     takePicture = async () => {
         try{
             if(this._camera){
@@ -104,6 +110,15 @@ class Camera extends PureComponent {
         else if (flash == "auto") flash = false
         this.setState( {
             flash: flash
+        })
+    }
+    
+    handleGrid = () => {
+        let grid = this.state.switchValue
+        if ( !grid ) grid = false
+        else grid = true
+        this.setState( {
+            grid: grid
         })
     }
     prepareRatio = async () => {
@@ -176,7 +191,7 @@ class Camera extends PureComponent {
         return (
             <View style={styles.container}>
                 <Header 
-                    {...this.props} 
+                    {...this.props}
                     onFlash = {this.handleFlash} 
                     isFlash={!this.state.frontCam}
                     flash = {this.state.flash}
@@ -187,6 +202,9 @@ class Camera extends PureComponent {
                     <View style={styles.previewContainer}>
                         <Image source={{width: previewDimensions.width, height: previewDimensions.height, uri: previewImage}} style={styles.preview}/>
                     </View>
+                }
+                {
+                    this.props.settings.grid && <Grid height = {height} />
                 }
                 <RNCamera
                     ratio={this.state.ratio}

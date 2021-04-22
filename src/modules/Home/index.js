@@ -21,6 +21,7 @@ import {
 import { handleNewDataMessage, updateProgressToNotification, showUploadImageNotification, removeNotification } from "../../utils/helpers/Notification.helpers";
 import Toast from 'react-native-easy-toast';
 
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -153,6 +154,7 @@ function mapDispathToProps(dispatch) {
 const mapStateToProps = (state) => ({
     identity: state.identity,
     activeTrip: state.trips.activeTrip || null,
+    settings: state.settings,
     contactNames: state.users.contactName
 });
 
