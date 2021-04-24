@@ -4,7 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+<<<<<<< HEAD:android/app/src/main/java/com/mcam/MainApplication.java
 
+=======
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+>>>>>>> 62f2acd04b2c636e9807316936a8a73387b2c6bf:android/app/src/main/java/com/momentz/MainApplication.java
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;

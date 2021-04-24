@@ -39,9 +39,15 @@ target 'mcam' do
 
   # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+<<<<<<< HEAD
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
   target 'mcamTests' do
+=======
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+  target 'momentzTests' do
+>>>>>>> 62f2acd04b2c636e9807316936a8a73387b2c6bf
     inherit! :search_paths
     # Pods for testing
   end

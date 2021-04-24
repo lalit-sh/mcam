@@ -37,7 +37,7 @@ const MainStack = createStackNavigator({
     CameraSetting: CameraSetting
 }, headerMode);
 
-const GalleryStack = 
+// const GalleryStack = 
 
 // const AppNavigator = createDrawerNavigator({ //side bar disabled
 //     MainStack: mainStack
