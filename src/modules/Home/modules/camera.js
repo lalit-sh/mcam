@@ -188,7 +188,6 @@ class Camera extends PureComponent {
         let height = this.getCameraViewHeight();
         let previewDimensions = this.getPreviewDimensions();
         let previewImage = this.state.previewUri;
-        console.log("this.props.settings", this.props.settings);
         return (
             <View style={styles.container}>
                 <Header 
