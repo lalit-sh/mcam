@@ -48,6 +48,19 @@ export const getTrips = (tripName, token) => {
     });
 }
 
+
+export const getUserTrips = (token) => {
+    let url = `${API_URL}getUserTrips`;
+    return axios({
+        method: "GET",
+        url: url,
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+        }
+    });
+}
+
 export const deleteTrip = (trips, token) => {
     let url = `${API_URL}trips`;
     return axios({
@@ -71,6 +84,37 @@ export const markTripActive = (trip, token) => {
         headers: {
             "Content-Type": "application/json",
             "Authorization": token
+        }
+    });
+}
+
+
+export const shareNewImage = (data, token) => {
+    let url = `${API_URL}newImage`;
+    return axios({
+        method: "POST",
+        url: url,
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+        },
+        data: data
+    });
+} 
+
+export const manageMembersToGroup = ({groupName, member, addMember}, token) => {
+    let url = `${API_URL}manageMembersToGroup`;
+    return axios({
+        method: "POST",
+        url: url,
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+        },
+        data: {
+            "groupName": groupName,
+            "member": member,
+            "operation": addMember ? "add" : "remove"
         }
     });
 }

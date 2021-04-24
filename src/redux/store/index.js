@@ -8,14 +8,14 @@ import { logger } from "redux-logger";
 const persistConfig = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ['identity', "users", "trips"]
+    whitelist: ['identity', "users", "trips", "settings"]
 }
 
 const middleware = [thunk, logger];
 const persistedReducer = persistReducer(persistConfig, reducers);
 
+export const store = createStore(persistedReducer, applyMiddleware(...middleware));
+export const persistor = persistStore(store);
 export default () => {
-    let store = createStore(persistedReducer, applyMiddleware(...middleware));
-    let persistor = persistStore(store);
     return { store, persistor};
 };

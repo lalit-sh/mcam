@@ -1,32 +1,34 @@
 import React from 'react';
 import { View } from 'react-native';
-import { gridStyle as styles } from '../style';
+
+const getBoxStyle = (i) => {
+    i = i+1;
+    let bw = 0.5;
+    let s = {
+        width: "33%",
+        height: "33%",
+        borderColor: "#fff",
+        borderLeftWidth: i%3 == 1 ? 0 : bw,
+        borderRightWidth: (i%3) == 0 ? 0 : bw,
+        borderBottomWidth: i >= 7 && i <= 9 ? 0 : bw,
+        borderTopWidth: i <= 3 ? 0 : bw
+    }
+    return s;
+}
 
 const Grid = (props) => {
     return (
-        // style={{height: props.height}}
-        <View>
-            <View style={{
-            flex: 1, flexDirection: "row", zIndex: 1
-            }}>
-                <View style={styles.box} />
-                <View style={styles.box} />
-                <View style={styles.box} />
-            </View>
-            <View style={{
-            flex: 1, flexDirection: "row", zIndex: 1, top: 230
-            }}>
-                <View style={styles.box} />
-                <View style={styles.box} />
-                <View style={styles.box} />
-            </View>
-            <View style={{
-            flex: 1, flexDirection: "row", zIndex: 1, top: 460
-            }}>
-                <View style={styles.box} />
-                <View style={styles.box} />
-                <View style={styles.box} />
-            </View>
+        <View style={{
+                        height: props.height,
+                        position: 'absolute',
+                        zIndex: 1,
+                        width: "101%",
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                    }}>
+            {Array(9).fill(1).map((el, i) => 
+                <View style={getBoxStyle(i)} key={i} />
+            )}
         </View>
         )
 }

@@ -23,7 +23,7 @@ export const cameraStyle = StyleSheet.create({
     left: 0,
     bottom: 0,
     backgroundColor: hfcolor,
-    zIndex: 2
+    zIndex: 9
   },
   header:{
     backgroundColor: hfcolor,
@@ -72,6 +72,21 @@ export const cameraStyle = StyleSheet.create({
     flex: 0,
     backgroundColor: '#fff',
     borderRadius: 50
+  },
+  preview: {
+    // bottom: '-5%',
+    transform: [{rotate: '350deg'}]
+  },
+  previewContainer: {
+    position: 'absolute',
+    zIndex: 8,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "rgba(0,0,0,0.4)"
   }
 });
 

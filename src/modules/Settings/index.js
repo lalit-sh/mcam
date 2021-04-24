@@ -11,17 +11,13 @@ import {
 import React, { Component } from 'react';
 import { logout } from '../../redux/actions/identity.action';
 import Header from '../../shared/Header';
-// import { logout } from "../../redux/actions/identity.action";
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { style } from "./style";
 class SettingModule extends Component {
-  handleLogout = data => {
-    if (data == 'Logout') {
+  handleLogout = () => {
       this.props.logout();
-      // return this.props.navigation.navigate("AuthMiddleware");
-    }
-    return this.props.navigation.navigate(data);
+      return this.props.navigation.navigate("AuthMiddleware");
   };
 
   showSetting = () => {
@@ -77,8 +73,8 @@ class SettingModule extends Component {
           <ListItem style={{borderBottomWidth: 0}}>
             <Body>
               <Text
-                style={{textAlign: 'center', color: "#f00", fontSize: 22, fontWeight: "bold"}}
-                onPress={this.handleLogout.bind(this, logout)}>
+                style={style.logout}
+                onPress={this.handleLogout}>
                 Logout
               </Text>
             </Body>
@@ -89,12 +85,12 @@ class SettingModule extends Component {
   }
 }
 
-// function mapDispathToProps(dispatch) {
-//   return bindActionCreators({ logout: logout }, dispatch);
-// }
+function mapDispathToProps(dispatch) {
+  return bindActionCreators({ logout: logout }, dispatch);
+}
 
 //mapping reducer states to component
-// const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({})
 
-// export default connect(mapStateToProps, mapDispathToProps)(SettingModule);
-export default SettingModule;
+export default connect(mapStateToProps, mapDispathToProps)(SettingModule);
+// export default SettingModule;

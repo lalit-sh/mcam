@@ -2,9 +2,10 @@ import {
     createAppContainer,
     createSwitchNavigator,
 } from 'react-navigation';
-import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+
 import Home from "../modules/Home";
 import AuthMiddleware from "./middleware/auth";
 import LoginScreen from "../modules/Login";
@@ -34,7 +35,9 @@ const MainStack = createStackNavigator({
     ManageTrip: ManageTrip,
     Settings: SettingModule,
     CameraSetting: CameraSetting
-}, headerMode)
+}, headerMode);
+
+// const GalleryStack = 
 
 // const AppNavigator = createDrawerNavigator({ //side bar disabled
 //     MainStack: mainStack

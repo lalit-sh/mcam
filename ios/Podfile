@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'momentz' do
-  # Pods for momentz
+target 'mcam' do
+  # Pods for mcam
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -37,9 +37,17 @@ target 'momentz' do
 
 
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+<<<<<<< HEAD
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
+  target 'mcamTests' do
+=======
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   target 'momentzTests' do
+>>>>>>> 62f2acd04b2c636e9807316936a8a73387b2c6bf
     inherit! :search_paths
     # Pods for testing
   end
@@ -47,10 +55,10 @@ target 'momentz' do
   use_native_modules!
 end
 
-target 'momentz-tvOS' do
-  # Pods for momentz-tvOS
+target 'mcam-tvOS' do
+  # Pods for mcam-tvOS
 
-  target 'momentz-tvOSTests' do
+  target 'mcam-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

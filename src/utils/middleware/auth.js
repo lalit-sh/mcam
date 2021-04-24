@@ -3,46 +3,48 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {logout} from '../../redux/actions/identity.action';
 class AuthMiddleWare extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+	constructor(props) {
+		super(props);
+		this.state = {};
+		this.checkAuthentication();
+	}
 
-    this.checkAuthentication();
-  }
+	isSessionExpired() {
+		if (!this.props.identity || !this.props.identity.isLoggedIn) {
+			return true;
+		}
 
-  isSessionExpired() {
-    if (!this.props.identity || !this.props.identity.isLoggedIn) {
-      return true;
-    }
+		let d1 = new Date(this.props.identity.expires);
+		let d2 = new Date();
+		let diff = d2 - d1;
+		if (Math.sign(diff) == 1) {
+			return true;
+		}
+		return false;
+	}
 
-    let d1 = new Date(this.props.identity.expires);
-    let d2 = new Date();
-    let diff = d2 - d1;
-    if (Math.sign(diff) == 1) {
-      return true;
-    }
+	checkAuthentication = async () => {
+		if(this.props.identity.isLoggedIn){
+			if(this.isSessionExpired()){
+				return this.props.logout();
+			}
+			this.props.navigation.navigate("App");
+		}
+		else
+			this.props.navigation.navigate("Auth");
+	}
 
-    return false;
-  }
-
-  checkAuthentication = async () => {
-    return this.props.navigation.navigate('App');
-  };
-
-  render() {
-    return null;
-  }
+	render() {
+		return null;
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({logout}, dispatch);
+	return bindActionCreators({logout}, dispatch);
 };
 
 const mapStateToProps = state => ({
-  identity: state.identity,
+	identity: state.identity,
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AuthMiddleWare);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthMiddleWare);

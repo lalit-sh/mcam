@@ -1,9 +1,10 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const style = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
+    logout: {
+        textAlign: "center",
+        fontSize: 24,
+        color: "#f44336",
+        fontWeight: "bold"
+    }
 });

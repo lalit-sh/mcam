@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1059154164937",
+    "project_id": "mcam-5b542",
+    "storage_bucket": "mcam-5b542.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059154164937:android:d3e0328288c62abffc2118",
+        "android_client_info": {
+          "package_name": "com.mcam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059154164937-1p7jqlc42maugnrp83jviinqckgv07ro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUiRwx6WH2jH2OkbNjCybvL-JRkaP02us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059154164937-1p7jqlc42maugnrp83jviinqckgv07ro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
