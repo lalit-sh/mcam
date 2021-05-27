@@ -1,0 +1,2 @@
+export const LATEST_IMAGE = "LATEST_IMAGE"; 
+export const GALLERY_IMAGE_READ = "GALLERY_IMAGE_READ";
