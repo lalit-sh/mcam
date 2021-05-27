@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import React, { PureComponent } from 'react';
 import { Dimensions, Platform, View, Image } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import ImagePicker from 'react-native-image-picker';
 import { cameraStyle as styles } from "../style";
 import Footer from "./Footer";
 import Grid from './Grid';

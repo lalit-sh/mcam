@@ -4,7 +4,6 @@ import { Text, View, Modal, Animated, Dimensions, Easing, I18nManager, Touchable
 import Header from "../Header";
 import { style } from "./style";
 import ImageZoom from "react-native-image-pan-zoom";
-// import ImageViewer from 'react-native-image-zoom-viewer';
 import ScaledImage from "../../shared/ScaledImage";
 import Share from "react-native-share"; 
 import { removeFile, removeFiles } from '../../utils/helpers/localStorageHelpers';
