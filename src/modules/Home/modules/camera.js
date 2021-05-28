@@ -192,6 +192,7 @@ class Camera extends PureComponent {
         }
     }
 
+
     render() {
         let height = this.getCameraViewHeight();
         let previewDimensions = this.getPreviewDimensions();
