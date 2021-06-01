@@ -4,12 +4,14 @@ import {
 import {
     LOGOUT
 } from "../../utils/constants/identity.constants";
-import { TOGGLE_GRID } from "../../utils/constants/settings.constants";
+import { UPDATE_SETTING } from "../../utils/constants/settings.constants";
 
 
 const initialState = {
     grid: false,
-    loading: false
+    loading: false,
+    imageResolution: "med",
+    previewTime: 3
 };
 
 
@@ -25,10 +27,10 @@ const settingsReducer = (state = initialState, action) => {
                 ...state,
                 grid: false
             }
-        case TOGGLE_GRID:
+        case UPDATE_SETTING:
             return {
                 ...state,
-                grid: !state.grid
+                [action.payload.key]: action.payload.value
             }
         default:
             return state;

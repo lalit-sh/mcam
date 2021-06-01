@@ -2,77 +2,115 @@ import {
   Body,
   Container,
   Content,
-
   Left,
   ListItem,
-  Picker, Right,
+  Right,
   Switch,
-  Text
+  Text,
+  Picker
 } from 'native-base';
 import React, { Component } from 'react';
+import { View } from 'react-native'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleGrid } from '../../../redux/actions/setting.action';
+import { updateSettings } from '../../../redux/actions/setting.action';
 import Header from '../../../shared/Header';
+// import RNPickerSelect from 'react-native-picker-select';
+import { AppStyle } from '../../../App.style';
+// import {Picker} from '@react-native-picker/picker';
 class CameraSetting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 'high',
-      chosen: '3',
-      switchValue: false
+      imageResolution: props.settings.imageResolution,
+      previewTime: props.settings.previewTime
     };
   }
-  onValueChange(value) {
+
+  updateImageRes = (e) => {
     this.setState({
-      selected: value,
-    });
+      imageResolution: e
+    }, this.updateSettings("imageResolution", e));
+  }
+
+  updatePreviewTime = (e) => {
+    this.setState({
+      previewTime: e
+    }, this.updateSettings("previewTime", e));
+  }
+
+  updateSettings = (key, value) => {
+    this.props.updateSettings(key, value)
+  }
+
+  onValueChange = (value) => {
+    console.log("Value", value);
   }
 
   render() {
     return (
-      <Container>
+      <Container style={{}}>
         <Header {...this.props} title="Camera Setting" isBack={true} />
         <Content style={{top: 30}}>
           <ListItem style={{borderBottomWidth: 0}}>
-            <Left>
-              <Text>Grid</Text>
-            </Left>
-            <Body />
+            <Body>
+              <Text style={[AppStyle.text]}>Grid</Text>
+            </Body>
             <Right>
               <Switch
                 value={this.props.settings.grid}  
-                onValueChange ={(switchValue)=>this.props.toggleGrid()} />
+                onValueChange ={(v)=> this.updateSettings('grid',!this.props.grid)} />
             </Right>
           </ListItem>
           <ListItem style={{borderBottomWidth: 0}}>
-            <Left>
-              <Text>Show Preview</Text>
-            </Left>
-            <Body />
+              <Body>
+                <Text style={{}}>Image Resolution</Text>
+              </Body>
+              <Right>
+                {/* <Picker
+                  selectedValue={this.state.imageResolution}
+                  onValueChange={(itemValue, itemIndex) =>
+                    this.updateImageRes(itemValue)
+                  }
+                  style={{width: 150}}
+                >
+                  <Picker.Item label="High" value="high" />
+                  <Picker.Item label="Med" value="med" />
+                  <Picker.Item label="Low" value="low" />
+                </Picker> */}
+                <Picker
+                  note
+                  mode="dropdown"
+                  style={{ width: 120 }}
+                  selectedValue={this.state.selected}
+                  onValueChange={this.onValueChange.bind(this)}
+                >
+                  <Picker.Item label="Wallet" value="key0" />
+                  <Picker.Item label="ATM Card" value="key1" />
+                  <Picker.Item label="Debit Card" value="key2" />
+                  <Picker.Item label="Credit Card" value="key3" />
+                  <Picker.Item label="Net Banking" value="key4" />
+                </Picker>
+              </Right>
+          </ListItem>
+          <ListItem style={{borderBottomWidth: 0}}>
+            <Body>
+              <Text style={[AppStyle.text]}>Preview Time</Text>
+            </Body>
             <Right>
-              <Switch/>
+              {/* <RNPickerSelect
+                    onValueChange={this.updatePreviewTime}
+                    value={this.state.previewTime}
+                    useNativeAndroidPickerStyle={false}
+                    placeholder={{}}
+                    style={{width: 100}}
+                    items={[
+                        { label: 'Off', value: 'off' },
+                        { label: '3s', value: '3' },
+                        { label: '5s', value: '5' },
+                    ]}
+                /> */}
             </Right>
-          </ListItem>
-          <ListItem style={{borderBottomWidth: 0}}>
-              <Text>Image Resolution</Text>
-              <Picker
-                selectedValue={this.state.selected}
-                onValueChange={this.onValueChange.bind(this)}>
-                <Picker.Item label="High" value="high" />
-                <Picker.Item label="Medium" value="medium" />
-                <Picker.Item label="Low" value="low" />
-              </Picker>
-          </ListItem>
-          <ListItem style={{borderBottomWidth: 0}}>
-              <Text>Preview Time</Text>
-              <Picker
-                selectedValue={this.state.chosen}
-                onValueChange={this.onValueChange.bind(this)}>
-                <Picker.Item label="3" value="3" />
-                <Picker.Item label="5" value="5" />
-                <Picker.Item label="10" value="10" />
-              </Picker>
           </ListItem>
         </Content>
       </Container>
@@ -81,7 +119,7 @@ class CameraSetting extends Component {
 }
 
 function mapDispathToProps(dispatch) {
-  return bindActionCreators({ toggleGrid }, dispatch);
+  return bindActionCreators({ updateSettings }, dispatch);
 }
 
 const mapStateToProps = (state) => ({

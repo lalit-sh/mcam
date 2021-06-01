@@ -11,6 +11,7 @@ import Loading from "../../shared/Loading";
 import Header from "../../shared/Header";
 import RNExitApp from 'react-native-exit-app';
 import { style } from "./style";
+import { AppStyle } from "../../App.style";
 class ManageGroups extends Component {
 	constructor(props) {
 		super(props);
@@ -195,13 +196,13 @@ class ManageGroups extends Component {
 		let admin = trip.members.find(el => el.isAdmin);
 		const isAdmin = admin.username == username;
 		return (
-			<Container>
+			<Container style={AppStyle.container}>
 				<Toast ref={this._toast}/>
 				<Header {...this.props} title={trip.name} isBack={true} isBack={true} isEllipseMenu={true} ellipseMenu={["Refresh"]} onEllipseItemClick={this.handleEllipseMenu}/>
 				{(trip.members && trip.members.length) > 0 &&
-					<View style={style.sectionStyle}>
+					<View style={[style.sectionStyle, AppStyle.container]}>
 						<View style={style.listHeader}>
-							<Text style={style.listHeaderText}>
+							<Text style={[style.listHeaderText, AppStyle.text]}>
 								Participants
 							</Text>
 						</View>
@@ -217,7 +218,7 @@ class ManageGroups extends Component {
 										<Thumbnail square source={{ uri: 'https://img.icons8.com/bubbles/100/000000/user.png' }} />
 									</Left>
 									<Body style={{borderBottomWidth: 0}}>
-										<Text>											
+										<Text style={AppStyle.text}>											
 											{el.username == username ? "You" : contacts[el.username]}
 										</Text>
 									</Body>
@@ -231,11 +232,11 @@ class ManageGroups extends Component {
 						</List>
 					</View>
 				}
-				<View style={style.sectionStyle}>
+				<View style={[style.sectionStyle, AppStyle.container]}>
 					{(isAdmin && contacts && Object.keys(contacts).length > 0) &&
 						<>
 							<View style={style.listHeader}>
-								<Text style={style.listHeaderText}>
+								<Text style={[style.listHeaderText, AppStyle.text]}>
 									Add members
 								</Text>
 							</View>
@@ -251,7 +252,7 @@ class ManageGroups extends Component {
 											<Thumbnail square source={{ uri: 'https://img.icons8.com/bubbles/100/000000/user.png' }} />
 										</Left>
 										<Body style={{borderBottomWidth: 0}}>
-											<Text>{contacts[el]}</Text>
+											<Text style={AppStyle.text}>{contacts[el]}</Text>
 										</Body>
 										<Right>
 										</Right>
@@ -267,7 +268,7 @@ class ManageGroups extends Component {
 										<Icon type="FontAwesome" name="share-alt" style={style.inviteFriendsIcon} />
 									</Left>
 									<Body style={{borderBottomWidth: 0}}>
-										<Text style={style.inviteFriendsText}>
+										<Text style={[style.inviteFriendsText, AppStyle.text]}>
 											Invite friends
 										</Text>
 									</Body>

@@ -13,10 +13,13 @@ export const getStoragePermission = async () => {
             const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
             if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
                 RNExitApp.exitApp(); 
+                return false;
             }
         }
+        return true;
     }catch(err){
-        console.log(err);
+        console.log("Error while requesting storage permission.");
+        return false;
     } 
 }
 
@@ -39,7 +42,8 @@ export const createAppDir = async () => {
 
 export const upsertDirectory = async (path) => {
     try{
-        if(isDirectroryExists(path)){
+        let isDirectroryExist = await isDirectroryExists(path);
+        if(!isDirectroryExist){
             await RNFS.mkdir(path);
         }
         return true;
@@ -69,6 +73,8 @@ export const stripFilePathPrefix = (pathStr) => {
 
 export const moveFile = async (frompPath, toPath) => {
     try{
+        console.log("fromPath", frompPath)
+        console.log("toPath", toPath);
         return await RNFS.moveFile(stripFilePathPrefix(frompPath), toPath);
     }catch(err){
         console.log(`Error while moving the file from ${frompPath} to ${toPath}`, err);

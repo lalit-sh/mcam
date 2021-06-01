@@ -5,7 +5,7 @@ export const style = StyleSheet.create({
     listHeader: {
         padding: 15,
         paddingLeft: 20,
-        backgroundColor: "rgba(228, 233, 237, 1)",
+        backgroundColor: "rgba(228, 233, 237, 0.3)",
         marginBottom: 15
     },
     listHeaderText: {
@@ -13,7 +13,7 @@ export const style = StyleSheet.create({
     },
     adminText: {
         fontSize: 13,
-        color: "green"
+        color: "#2bc20e"
     },
     sectionStyle:{
         paddingBottom: 15

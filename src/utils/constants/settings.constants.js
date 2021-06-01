@@ -1,1 +1,2 @@
 export const TOGGLE_GRID = 'TOGGLE_GRID'
+export const UPDATE_SETTING = "UPDATE_SETTING"

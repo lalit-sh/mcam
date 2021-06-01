@@ -1,21 +1,19 @@
 import { StyleSheet } from "react-native";
 
 export const style = StyleSheet.create({
-    header: {
-        backgroundColor: "#fff",
-        color: "#000",
-        marginBottom: 50
+    container:{
+        backgroundColor: "#000"
     },
     modelViewOne: {
         flex:1,flexDirection: 'column',
-         backgroundColor: "#bdbdbdaa", 
-         justifyContent: 'center', 
-         alignItems: 'center'
+        backgroundColor: "rgba(189,189,189, 0.3)", 
+        justifyContent: 'center', 
+        alignItems: 'center'
     },
     modelViewTwo: {
         backgroundColor:"#ffffff", 
         margin:0, 
-        padding:15,
+        padding:25,
         paddingBottom:0,
         borderRadius:10, 
         flex:0,
@@ -28,19 +26,21 @@ export const style = StyleSheet.create({
     popupInut: {
         fontSize:16,
         width: 270, 
-        padding:5, 
         borderStyle: "solid", 
         borderColor: "#bdbdbd", 
         borderWidth: 1, 
         borderRadius:5,
-        paddingRight: 25
+        backgroundColor: "#fff",
+        padding:0, 
+        paddingRight: 25,
+
     },
     popupView: {
-         flex: 1, 
-         flexDirection: 'row', 
-         justifyContent: 'space-between',
-         marginTop:25
-        },
+        flex: 1, 
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        marginTop:25
+    },
     cancelButton: {
         color:"#fff", 
         marginRight:3,flexDirection: 'row', 

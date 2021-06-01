@@ -35,7 +35,7 @@ class Home extends Component {
 
     componentDidMount = async () => {
         this.PushNotification.init();
-        getStoragePermission()
+        await getStoragePermission()
         this.activeTrip = await this.getActiveTrip();
     }
 
