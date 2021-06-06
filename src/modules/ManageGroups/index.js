@@ -224,7 +224,7 @@ class ManageGroups extends Component {
 									</Body>
 									<Right>
 										{el.isAdmin &&
-											<Text style={style.adminText}>admin</Text>
+											<Text style={[AppStyle.highlightOnText]}>admin</Text>
 										}
 									</Right>
 								</ListItem>

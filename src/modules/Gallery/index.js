@@ -9,6 +9,7 @@ import Loading from '../../shared/Loading';
 import { TimelineGalleryStyle as style } from "./style";
 import ImageThumbnail from "../../shared/ImageThumb";
 import ImageSlider from "../../shared/ImageSliderModal";
+import { AppStyle } from '../../App.style';
 
 class Gallery extends Component {
     
@@ -57,7 +58,7 @@ class Gallery extends Component {
         let groups = Object.keys(gallery);
         return groups.map((el, i) =>
             <View key={i} style={style.gpContainer}>
-                <Text style={style.gpContainerTitle}>{el}</Text>
+                <Text style={[style.gpContainerTitle, AppStyle.text]}>{el}</Text>
                 <View style={style.gpImageContainer}>
                     {gallery[el].map((image, j) => 
                         <ImageThumbnail 
@@ -80,7 +81,7 @@ class Gallery extends Component {
         let { gallery } = this.props;
         let { isImageViewOpen, activeImageIndex } = this.state;
         return (
-            <Container>
+            <Container style={AppStyle.container}>
                 <Header {...this.props} isBack={true} title="Gallery"/>
                 <Content>
                     {this.getContent()}

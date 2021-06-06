@@ -42,14 +42,14 @@ class SettingModule extends Component {
         label: "Camera Setting",
         icon: "cog"
       },
-      {
-        label: "Account Setting",
-        icon: "user-cog",
-      },
-      {
-        label: "Privacy Setting",
-        icon: "user-shield"
-      }
+      // {
+      //   label: "Account Setting",
+      //   icon: "user-cog",
+      // },
+      // {
+      //   label: "Privacy Setting",
+      //   icon: "user-shield"
+      // }
     ]
     return (
       <Container style={AppStyle.container}>

@@ -5,18 +5,17 @@ import {
   Left,
   ListItem,
   Right,
-  Switch,
-  Text,
-  Picker
+  Text
 } from 'native-base';
 import React, { Component } from 'react';
-import { View } from 'react-native'
+import { View, Switch } from 'react-native'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateSettings } from '../../../redux/actions/setting.action';
 import Header from '../../../shared/Header';
 // import RNPickerSelect from 'react-native-picker-select';
-import { AppStyle } from '../../../App.style';
+import { AppStyle, highlightColor, highlightOnColor } from '../../../App.style';
+import Picker from "../../../shared/Picker";
 // import {Picker} from '@react-native-picker/picker';
 class CameraSetting extends Component {
   constructor(props) {
@@ -40,57 +39,58 @@ class CameraSetting extends Component {
   }
 
   updateSettings = (key, value) => {
+    console.log("here", key, value);
     this.props.updateSettings(key, value)
   }
 
-  onValueChange = (value) => {
-    console.log("Value", value);
-  }
-
   render() {
+    const { captureSound, grid, imageQuality, previewTime } = this.props.settings;
     return (
-      <Container style={{}}>
+      <Container style={AppStyle.container}>
         <Header {...this.props} title="Camera Setting" isBack={true} />
         <Content style={{top: 30}}>
+          <ListItem style={{borderBottomWidth: 0}}>
+            <Body>
+              <Text style={[AppStyle.text]}>Capture Sound</Text>
+            </Body>
+            <Right>
+              <Switch
+                value={captureSound}
+                onValueChange ={(v)=> this.updateSettings('captureSound', v)} 
+                trackColor={{false: highlightColor, true: highlightOnColor}}
+              />
+            </Right>
+          </ListItem>
           <ListItem style={{borderBottomWidth: 0}}>
             <Body>
               <Text style={[AppStyle.text]}>Grid</Text>
             </Body>
             <Right>
               <Switch
-                value={this.props.settings.grid}  
-                onValueChange ={(v)=> this.updateSettings('grid',!this.props.grid)} />
+                value={grid}  
+                onValueChange ={(v)=> this.updateSettings('grid', v)} 
+                trackColor={{false: highlightColor, true: highlightOnColor}}
+              />
             </Right>
           </ListItem>
           <ListItem style={{borderBottomWidth: 0}}>
               <Body>
-                <Text style={{}}>Image Resolution</Text>
+                <Text style={AppStyle.text}>Image Resolution</Text>
               </Body>
               <Right>
-                {/* <Picker
-                  selectedValue={this.state.imageResolution}
-                  onValueChange={(itemValue, itemIndex) =>
-                    this.updateImageRes(itemValue)
-                  }
-                  style={{width: 150}}
-                >
-                  <Picker.Item label="High" value="high" />
-                  <Picker.Item label="Med" value="med" />
-                  <Picker.Item label="Low" value="low" />
-                </Picker> */}
                 <Picker
-                  note
-                  mode="dropdown"
-                  style={{ width: 120 }}
-                  selectedValue={this.state.selected}
-                  onValueChange={this.onValueChange.bind(this)}
-                >
-                  <Picker.Item label="Wallet" value="key0" />
-                  <Picker.Item label="ATM Card" value="key1" />
-                  <Picker.Item label="Debit Card" value="key2" />
-                  <Picker.Item label="Credit Card" value="key3" />
-                  <Picker.Item label="Net Banking" value="key4" />
-                </Picker>
+                  items={[
+                    { label: "High", value: 0.98 },
+                    { label: "Medium", value: 0.5 },
+                    { label: "Low", value: 0.2 }
+                  ]}
+                  onChange={(e) => this.updateSettings("imageQuality", e.value)}
+                  value={imageQuality}
+                  style={{
+                    text: AppStyle.text,
+                    body: AppStyle.highlighted
+                  }}
+                />
               </Right>
           </ListItem>
           <ListItem style={{borderBottomWidth: 0}}>
@@ -98,18 +98,19 @@ class CameraSetting extends Component {
               <Text style={[AppStyle.text]}>Preview Time</Text>
             </Body>
             <Right>
-              {/* <RNPickerSelect
-                    onValueChange={this.updatePreviewTime}
-                    value={this.state.previewTime}
-                    useNativeAndroidPickerStyle={false}
-                    placeholder={{}}
-                    style={{width: 100}}
-                    items={[
-                        { label: 'Off', value: 'off' },
-                        { label: '3s', value: '3' },
-                        { label: '5s', value: '5' },
-                    ]}
-                /> */}
+            <Picker
+                  items={[
+                    { label: "Off", value: 0 },
+                    { label: "3s", value: 3 },
+                    { label: "5s", value: 5 }
+                  ]}
+                  onChange={(e) => this.updateSettings("previewTime", e.value)}
+                  value={previewTime}
+                  style={{
+                    text: AppStyle.text,
+                    body: AppStyle.highlighted
+                  }}
+                />
             </Right>
           </ListItem>
         </Content>

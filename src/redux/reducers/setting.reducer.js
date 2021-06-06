@@ -10,8 +10,9 @@ import { UPDATE_SETTING } from "../../utils/constants/settings.constants";
 const initialState = {
     grid: false,
     loading: false,
-    imageResolution: "med",
-    previewTime: 3
+    imageQuality: 0.5,
+    previewTime: 3,
+    captureSound: true
 };
 
 

@@ -66,11 +66,10 @@ class Camera extends PureComponent {
         try{
             if(this._camera){
                 const options = {
-                    quality: this.props.quality || 0.5,
+                    quality: this.props.settings.imageQuality && parseFloat(this.props.settings.imageQuality) || 0.5,
                     base64: false
                 }
                 const data = await this._camera.takePictureAsync(options);
-                // this.setPreview(data.uri);
                 if(this.props.onClick){
                     this.props.onClick(data.uri);
                 }else{
@@ -83,17 +82,6 @@ class Camera extends PureComponent {
     }
 
     onGallery = () => {
-        // const options = {
-        //     title: 'Select Avatar',
-        //     customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-        //     storageOptions: {
-        //       skipBackup: true,
-        //       path: 'images',
-        //     },
-        //   };
-        // ImagePicker.launchImageLibrary(options, (response) => {
-        //     // Same code as in above section!
-        // });
         this.props.navigation.navigate("Gallery");
     }
 
@@ -177,8 +165,8 @@ class Camera extends PureComponent {
     
 
     setPreview = img => {
-        if(!this.state.previewUri && this.props.activeTrip && this.props.activeTrip.name){
-            let previewTimeOut = 1500;
+        let previewTimeOut = this.props.settings.previewTime;
+        if(!this.state.previewUri && this.props.activeTrip && this.props.activeTrip.name && previewTimeOut !== 0){
             img = `file:${img}`;
             this.setState({
                 previewUri: img
@@ -188,7 +176,7 @@ class Camera extends PureComponent {
                 this.setState({
                     previewUri: null
                 })
-            }, previewTimeOut)
+            }, parseInt(previewTimeOut) * 1000)
         }
     }
 
@@ -197,6 +185,7 @@ class Camera extends PureComponent {
         let height = this.getCameraViewHeight();
         let previewDimensions = this.getPreviewDimensions();
         let previewImage = this.state.previewUri;
+        let { grid, captureSound } = this.props.settings;
         return (
             <View style={styles.container}>
                 <Header 
@@ -212,7 +201,7 @@ class Camera extends PureComponent {
                         <Image source={{width: previewDimensions.width, height: previewDimensions.height, uri: previewImage}} style={styles.preview}/>
                     </View>
                 }
-                {(this.props.settings && this.props.settings.grid) &&
+                {(grid) &&
                     <Grid height = {height} />
                 }
                 <RNCamera
@@ -225,7 +214,7 @@ class Camera extends PureComponent {
                     }}
                     type={this.getCameraType()}
                     flashMode={this.getFlash()}
-                    playSoundOnCapture={true}
+                    playSoundOnCapture={captureSound}
                     androidCameraPermissionOptions={cameraPermissionConfig}
                     androidRecordAudioPermissionOptions={audioRecordingPermissionConfig}
                 />
