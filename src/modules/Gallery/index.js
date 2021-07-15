@@ -83,9 +83,7 @@ class Gallery extends Component {
         return (
             <Container style={AppStyle.container}>
                 <Header {...this.props} isBack={true} title="Gallery"/>
-                <Content>
-                    {this.getContent()}
-                </Content>
+                {this.getContent()}
                 {this.isGallery() &&
                     <ImageSlider 
                         isOpen={isImageViewOpen}

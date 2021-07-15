@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Container } from "native-base";
 import RNExitApp from 'react-native-exit-app';
 import Camera from "./modules/camera";
-import { Alert, StatusBar } from 'react-native';
+import { Alert, StatusBar, Platform } from 'react-native';
 import PushNotification from "../../utils/PushNotification";
 import { updateFcmToken } from "../../redux/actions/users.action";
 import { shareImageWithGroup } from "../../redux/actions/trips.action";
@@ -108,28 +108,22 @@ class Home extends Component {
         if(this.activeTrip.members.length > 1){
             //no need to upload file to serever if main participent is self
             let notification;
-            uploadImage(fullFilePath, this.getFileNameForS3Upload(filename), (evt) => {
-                let uploaded = parseInt((evt.loaded * 100) / evt.total);
-                if(!notification){
-                    notification = showUploadImageNotification(this.props.activeTrip)
-                }
-                if(notification)
-                    updateProgressToNotification(notification, uploaded, 'Done');
-            }, (err, data) => {
-                if(notification)
-                    removeNotification(notification.notificationId)
-                if(err){
-                    console.log("Error while uploading file", err);
-                    this._toast && this._toast.current.show(`Unable to upload image`);
-                }else{
-                    let d = {
-                        "imageUrl": data.Location,
-                        "members": this.activeTrip.members.filter(el => el.username !== username), //skipping self
-                        "groupId": this.activeTrip._id,
-                        "imageKey": data.key
+            uploadImage({
+                "path": fullFilePath,
+                "members": this.activeTrip.members.filter(el => el.username !== username), //skipping self
+                "groupId": this.activeTrip._id,
+                "imageKey": this.getFileNameForS3Upload(filename),
+                "activeMembers": this.props.activeTrip.members.length - 1,
+            }, (uploaded, err) => {
+                if(Platform.OS == 'ios'){
+                    if(!notification && !err){
+                        notification = showUploadImageNotification(this.props.activeTrip)
+                    }else if((err || uploaded == 100) && notification){
+                        removeNotification(notification.notificationId)
                     }
-                    this.props.shareImageWithGroup(d)
                 }
+                if(err && this._toast && this._toast.current)
+                    this._toast.current.show(`Unable to upload image`);
             });
         }
     }

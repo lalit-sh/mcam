@@ -38,5 +38,11 @@ export const style = StyleSheet.create({
     inviteFriendsText:{
         fontSize: 18,
         // marginLeft: 15
-    } 
+    },
+    btnBottom: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0
+    }
 });

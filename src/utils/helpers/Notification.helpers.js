@@ -8,23 +8,12 @@ import {
 import PushNotification from "../PushNotification";
 import { store }  from "../../redux/store/index";
 import { S3_OBJECT_PATH } from "../../utils/config";
+import { USER_ADDED_TO_GROUP, USER_REMOVED_TO_GROUP, USER_LEFT_GROUP, GROUP_DELETED } from '../constants/trips.constant';
+import { getTrips } from "../../redux/actions/trips.action";
 
 var getState = store.getState 
 const androidChannelName = PushNotification.getChannel();
 
-const newImageMessage = (data) => {
-    const notification = showNewImageNotification(data);
-    const storagePath = getAppStoragePath(data.group);
-    let key = data.imageKey;
-    key = key.replace(`${S3_OBJECT_PATH}/`, "sh_");
-    const fullFilePath = `${storagePath}/${key}`;
-    downloadImage(data.imageKey, fullFilePath, (progress) => updateProgressToNotification(notification, progress));
-}
-
-const addedToGroupMessage = (data) => {
-    const notification = showNewUserAddedToGroupNotification(data);
-    return notification;
-}
 
 const getSenderName = (data) => {
     const state = getState();
@@ -33,12 +22,25 @@ const getSenderName = (data) => {
     return senderName;
 }
 
-const newNotification = (id, title, body="") => {
-    const noti = new firebase.notifications.Notification()
+const getUserName = () => {
+    const state = getState();
+    const username = state?.identity?.username;
+    return username;
+}
+
+const getActiveGroup = () => {
+    const state = getState();
+    const activeGroup = state?.trips?.activeTrip;
+    return activeGroup;
+}
+
+
+const createNotification = (id, title, body="") => {
+    const notification = new firebase.notifications.Notification()
                                     .setNotificationId(id)
                                     .setTitle(title)
                                     .setBody(body);
-    return noti;
+    return notification;
 }
 
 const displayNotification = (notification) => {
@@ -48,24 +50,144 @@ const displayNotification = (notification) => {
     firebase.notifications().displayNotification(notification);
 }
 
-export const handleNewDataMessage = (message, gs) => {
+export const handleNewDataMessage = async (message, gs) => {
     try{
         if(gs)
             getState = gs;
+        console.log("here", message)
         if(message){
             let data = message.data;
-            if(data.type && data.type == 'ADDED_USER_TO_GROUP'){
-                return addedToGroupMessage(data);
-            }
-
-            if(data.type && data.type == 'NEW_IMAGE_RECEIVED'){
-                return newImageMessage(data)
+            let eventName = data.type;
+            switch (eventName) {
+                case "ADDED_USER_TO_GROUP":
+                    await userAddedToGroup(data);
+                    break;
+                case "REMOVED_USER_TO_GROUP":
+                    await userRemovedFromGroup(data);
+                    break;
+                case "USER_LEFT_GROUP":
+                    await userLeftGroup(data);
+                    break;
+                case "GROUP_DELETED":
+                    await groupDeleted(data);
+                    break;
+                case "NEW_IMAGE_RECEIVED":
+                    await newImageReceived(data);
+                    break;
+                default:
+                    console.log("An unhandled event happend", data);
+                    break;
             }
         }
     }catch(err){
         console.log("Error: Error in handleNewDataMessage", err)
     }
 }
+
+
+const userAddedToGroup = async (data) => {
+    try{
+        const senderName = getSenderName(data);
+        const updatedUserName = data.updatedUserName;
+        console.log("updatedUserName", updatedUserName)
+        console.log("getUserName()", getUserName()) 
+        if(updatedUserName == getUserName()){
+            const notification = createNotification("USER_ADDED_TO_GROUP", `${senderName} added you to "${data.groupName}" group`) 
+            displayNotification(notification);
+            getTrips()(store.dispatch, getState)
+        }else{
+            store.dispatch({
+                type: USER_ADDED_TO_GROUP,
+                payload: {
+                    _id: data.groupId,
+                    updatedMember: updatedUserName  
+                }
+            })
+        }
+    }catch(err){
+        console.log("An error occured in Notification.helpers.js at userAddedToGroup: ", err);
+    }
+}
+
+const userRemovedFromGroup = async (data) => {
+    try{
+        const senderName = getSenderName(data);
+        const updatedUserName = data.updatedUserName;
+        if(updatedUserName == getUserName()){
+            const notification = createNotification("USER_REMOVED_FROM_GROUP", `${senderName} removed you from "${data.groupName}" group`); 
+            displayNotification(notification);
+            getTrips()(store.dispatch, getState)
+        }else{
+            store.dispatch({
+                type: USER_REMOVED_TO_GROUP,
+                payload: {
+                    _id: data.groupId,
+                    updatedMember: updatedUserName  
+                }
+            })
+        }
+    }catch(err){
+        console.log("An error occured in Notification.helpers.js at userRemovedFromGroup: ", err);
+    }
+}
+
+const userLeftGroup = async (data) => {
+    try{
+        store.dispatch({
+            type: USER_LEFT_GROUP,
+            payload: {
+                _id: data.groupId,
+                updatedMember: updatedUserName  
+            }
+        })
+    }catch(err){
+        console.log("An error occured in Notification.helpers.js at userLeftGroup: ", err);
+    }
+}
+
+const groupDeleted = async (data) => {
+    try{
+        const senderName = getSenderName(data);
+        const activeGroup = getActiveGroup();
+        if(activeGroup && activeGroup._id == data.groupId){
+            const notification = createNotification("GROUP_DELETED", `${senderName} deleted "${data.groupName}" group`); 
+            displayNotification(notification);
+        }
+        store.dispatch({
+            type: GROUP_DELETED,
+            payload: {
+                _id: data.groupId
+            }
+        })
+    }catch(err){
+        console.log("An error occured in Notification.helpers.js at groupDeleted: ", err);
+    }
+}
+
+const newImageReceived = async (data) => {
+    try{
+        const notification = showNewImageNotification(data);
+        const storagePath = getAppStoragePath(data.group);
+        let key = data.imageKey;
+        key = key.replace(`${S3_OBJECT_PATH}/`, "sh_");
+        const fullFilePath = `${storagePath}/${key}`;
+        downloadImage(key, data.imageUri, fullFilePath, (progress) => updateProgressToNotification(notification, progress));
+    }catch(err){
+        console.log("An error occured in Notification.helpers.js at newImageReceived: ", err);
+    }
+}
+
+const showNewImageNotification = (data, props = {}) => {
+    try{
+        const senderName = getSenderName(data);
+        const newImageNotification  = createNotification('NEW_IMAGE_RECEIVED', `${senderName} shared new image in ${data.group} group`, 'Downloading');
+        displayNotification(newImageNotification)
+        return newImageNotification;
+    }catch(err){
+        console.log("Error: Error in showNewImageNotification", err)
+    }
+}
+
 
 export const updateProgressToNotification = (notification, progress, onCompleteText='Downloaded') => {
     try{
@@ -80,36 +202,14 @@ export const updateProgressToNotification = (notification, progress, onCompleteT
     }
 }
 
-export const showNewImageNotification = (data, props = {}) => {
-    try{
-        const senderName = getSenderName(data);
-        const newImageNotification  = newNotification('NEW_IMAGE_RECEIVED', `${senderName} shared new image in ${data.group} group`, 'Downloading');
-        displayNotification(newImageNotification)
-        return newImageNotification;
-    }catch(err){
-        console.log("Error: Error in showNewImageNotification", err)
-    }
-}
-
 export const showUploadImageNotification = (activeTrip) => {
     try{
         const activeMembers = activeTrip.members.length - 1; //one less for self
-        const newImageNotification = newNotification('NEW_IMAGE_UPLOAD', `Sharing image with ${activeMembers} peoples.`, 'Uploading');
+        const newImageNotification = createNotification('NEW_IMAGE_UPLOAD', `Sharing image with ${activeMembers} peoples.`, 'Uploading');
         displayNotification(newImageNotification)
         return newImageNotification;
     }catch(err){
         console.log("Error: Error at showUploadImageNotification", err);
-    }
-}
-
-export const showNewUserAddedToGroupNotification = (data) => {
-    try{
-        const senderName = getSenderName(data);
-        const notification = newNotification("USER_ADDED_TO_GROUP", `${senderName} added you to "${data.groupName}" group`) 
-        displayNotification(notification);
-        return notification;
-    }catch(err){
-        console.log("Error: Error at showNewUserAddedToGroupNotification", err);
     }
 }
 

@@ -1,10 +1,10 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { updateTrip, manageMembersToGroup } from "../../redux/actions/trips.action";
+import { updateTrip, manageMembersToGroup, deleteGroup } from "../../redux/actions/trips.action";
 import { getUserContacts, clearError, syncUserContacts } from "../../redux/actions/users.action";
 import Toast from 'react-native-easy-toast'
-import { PermissionsAndroid, Platform, Alert, Linking, AppState, Share } from 'react-native';
+import { PermissionsAndroid, Platform, Alert, Linking, AppState, Share, TouchableOpacity } from 'react-native';
 import Contacts from 'react-native-contacts';
 import { Container, Icon, List, ListItem, Thumbnail, Text, Item, Body, Right, Content, Input, Left, View } from "native-base";
 import Loading from "../../shared/Loading";
@@ -16,7 +16,8 @@ class ManageGroups extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tripName: props.navigation.state.params.tripId,
+			tripId: props.navigation.state.params.tripId,
+			tripName: props.navigation.state.params.tripName,
 			appState: AppState.currentState,
 			initialized: false
 		};
@@ -118,14 +119,14 @@ class ManageGroups extends Component {
 			this.props.clearError();
 		}
 
-		if(this.props.navigation.state.params.tripId != this.state.tripName){
-			this.setState({tripName: this.props.navigation.state.params.tripId})
+		if(this.props.navigation.state.params.tripId != this.state.tripId){
+			this.setState({tripId: this.props.navigation.state.params.tripId, tripName: this.props.navigation.state.params.tripName})
 		}
 	};
 
 	isAlreayAMember = (number) => {
-		let tripName = this.state.tripName;
-		let trip = this.getTrip(tripName);
+		let tripId = this.state.tripId;
+		let trip = this.getTrip(tripId);
 		if(!trip){
 			return false;
 		}
@@ -133,10 +134,10 @@ class ManageGroups extends Component {
 		return trip && trip.members && trip.members.find(el => el.username == number)    
 	}
 
-	getTrip(tripName){
+	getTrip(tripId){
 		let trips = this.props.trips.trips;
 		for(let trip of trips){
-			if(trip._id != tripName){
+			if(trip._id != tripId){
 				continue;
 			}
 			return trip;
@@ -146,7 +147,7 @@ class ManageGroups extends Component {
 
 	handleAddMember = (username) => {
 		if(username && username.trim()){
-			let trip = this.getTrip(this.state.tripName);
+			let trip = this.getTrip(this.state.tripId);
 			let m = trip && trip.members
 			let addMember = true;
 			if(!m || !Array.isArray(m)){
@@ -156,7 +157,7 @@ class ManageGroups extends Component {
 			if(i > -1){
 				addMember = false;
 			}
-			this.props.manageMembersToGroup({groupName: trip.name, member: username.trim(), addMember});
+			this.props.manageMembersToGroup({groupName: trip.name, groupId: trip._id, member: username.trim(), addMember});
 			// this.props.updateTrip(trip.name,  {members: m})
 		}
 	}
@@ -184,21 +185,60 @@ class ManageGroups extends Component {
 		this.syncUserContacts();
 	}
 
+	handleDeleteGroup = (isAdmin) => {
+		let trip = this.getTrip(this.state.tripId);
+		if(isAdmin){
+			this.state.isDeletingGroup = true;
+			return this.props.deleteGroup(trip._id);
+		}
+		this.state.isLeavingGroup = true;
+		this.props.manageMembersToGroup({groupName: trip.name, groupId: trip._id, member: this.props.username.trim(), addMember: false})
+	}
+
+	goBack = () => {
+		this.props.navigation.goBack()
+	}
+
 	render() {
 		let { username, contacts } = this.props;
 		if(!this.state.initialized)
 		return <Loading />
-    
 		if(!contacts)
 			contacts = {};
 			
-		let trip = this.getTrip(this.state.tripName)
+		let trip = this.getTrip(this.state.tripId)
+
+		if(!trip){
+			let message = 'The group you are looking for does not exists anymore.';
+			if(this.state.tripId){
+				if(this.state.isDeletingGroup){
+					message = `You have deleted this group.`;
+				}else if(this.state.isLeavingGroup){
+					message = "You left this group."
+				}
+			}
+			return 	<Container style={AppStyle.container}>
+						<Header {...this.props} isBack={true} title={this.state.tripName}/>
+						<View style={[AppStyle.flexCenter]}>
+							<Text style={[AppStyle.text, AppStyle.textCenter, AppStyle.marginBtm10]}>
+								{message}
+							</Text>
+							<TouchableOpacity onPress={this.goBack} style={[AppStyle.dangerBtn, AppStyle.marginBtm20]}>
+								<Text style={[AppStyle.text, AppStyle.textCenter]}>
+									Go to Manage Groups
+								</Text>
+							</TouchableOpacity>
+						</View>
+					</Container> 
+		}
+
+
 		let admin = trip.members.find(el => el.isAdmin);
 		const isAdmin = admin.username == username;
 		return (
 			<Container style={AppStyle.container}>
 				<Toast ref={this._toast}/>
-				<Header {...this.props} title={trip.name} isBack={true} isBack={true} isEllipseMenu={true} ellipseMenu={["Refresh"]} onEllipseItemClick={this.handleEllipseMenu}/>
+				<Header {...this.props} title={trip.name} isBack={true} isEllipseMenu={true} ellipseMenu={["Refresh"]} onEllipseItemClick={this.handleEllipseMenu}/>
 				{(trip.members && trip.members.length) > 0 &&
 					<View style={[style.sectionStyle, AppStyle.container]}>
 						<View style={style.listHeader}>
@@ -219,10 +259,10 @@ class ManageGroups extends Component {
 									</Left>
 									<Body style={{borderBottomWidth: 0}}>
 										<Text style={AppStyle.text}>											
-											{el.username == username ? "You" : contacts[el.username]}
+											{el.username == username ? "You" : (contacts[el.username] || el.username)}
 										</Text>
 									</Body>
-									<Right>
+									<Right style={{borderBottomWidth: 0}}>
 										{el.isAdmin &&
 											<Text style={[AppStyle.highlightOnText]}>admin</Text>
 										}
@@ -254,8 +294,6 @@ class ManageGroups extends Component {
 										<Body style={{borderBottomWidth: 0}}>
 											<Text style={AppStyle.text}>{contacts[el]}</Text>
 										</Body>
-										<Right>
-										</Right>
 									</ListItem>
 								)}
 								<ListItem
@@ -277,13 +315,21 @@ class ManageGroups extends Component {
 						</>
 					}
 				</View>
+				<TouchableOpacity style={[AppStyle.dangerBtn, AppStyle.btnBig, style.btnBottom]} onPress={() => this.handleDeleteGroup(isAdmin)}>
+					<Text style={[AppStyle.text, AppStyle.textCenter]}>
+						{isAdmin ? 
+							"Delete Group" :
+							"Leave Group"
+						}
+					</Text>
+				</TouchableOpacity>
 			</Container>
 		);
 	}
 }
 
 function mapDispathToProps(dispatch) {
-	return bindActionCreators({ updateTrip, getUserContacts, clearError, syncUserContacts, manageMembersToGroup }, dispatch);
+	return bindActionCreators({ updateTrip, getUserContacts, clearError, syncUserContacts, manageMembersToGroup, deleteGroup }, dispatch);
 }
 
   //mapping reducer states to component

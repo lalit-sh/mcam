@@ -1,6 +1,6 @@
 
-export const SERVER_URL = "https://52.14.205.12";
-// export const SERVER_URL = "http://192.168.135.1:9000";
+// export const SERVER_URL = "https://52.14.205.12";
+export const SERVER_URL = "http://192.168.0.103:9000";
 export const API_URL = `${SERVER_URL}/api/v1/`;
 export const S3_ACCESS_KEY_ID = "AKIA5JWWGPAKUGUIBR2R";
 export const S3_SECRET_ACCESS_KEY = "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";

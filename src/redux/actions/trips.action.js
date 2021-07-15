@@ -76,9 +76,9 @@ export const updateTrip = (tripName, data) => (dispatch, getState) => {
     })
 };
 
-export const manageMembersToGroup = ({groupName, member, addMember}) => (dispatch, getState) => {
+export const manageMembersToGroup = ({groupId, groupName, member, addMember}) => (dispatch, getState) => {
     dispatch(started());
-    service.manageMembersToGroup({groupName, member, addMember}, getToken(getState))
+    service.manageMembersToGroup({groupName, member, addMember, groupId}, getToken(getState))
     .then(resp => {
         console.log("updateTrip resp", resp);
         if(resp && resp.data){
@@ -110,9 +110,9 @@ export const getTrips = (tripName = null) => (dispatch, getState) => {
     })
 };
 
-export const deleteTrip = (trips = []) => (dispatch, getState) => {
+export const deleteGroup = (id) => (dispatch, getState) => {
     dispatch(started());
-    service.deleteTrip(trips, getToken(getState))
+    service.deleteTrip(id, getToken(getState))
     .then(resp => {
         if(resp && resp.data){
             getTrips()(dispatch, getState);;

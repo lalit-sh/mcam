@@ -27,7 +27,7 @@ class Camera extends PureComponent {
         this.state = {
             frontCam: false,
             flash: false,
-            ratio: "16:9"
+            ratio: "4:3"
         }
     }
 
@@ -209,9 +209,9 @@ class Camera extends PureComponent {
                     ref={(ref) => {
                         this._camera = ref;
                     }}
-                    style={{
+                    style={[{
                         height: height
-                    }}
+                    }, styles.camera]}
                     type={this.getCameraType()}
                     flashMode={this.getFlash()}
                     playSoundOnCapture={captureSound}

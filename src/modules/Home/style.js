@@ -2,22 +2,32 @@ import { Dimensions, StyleSheet } from "react-native";
 
 let {width, height} = Dimensions.get('window');
 const bgColor = "rgba(0,0,0,1)";
-const hfcolor = "rgba(0,0,0, 0.4)";
+const hfcolor = "rgba(0,0,0, 0.1)";
 
 export const cameraStyle = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
+    position: "relative",
     flexDirection: 'column',
     backgroundColor: bgColor,
     height: height,
     justifyContent: 'center',
+  },
+  camera:{
+    // position: "absolute",
+    // top: "15%",
+    // left: 0,
+    // right: 0
   },
   footer:{
     // flex: 0, 
     flexDirection: 'row', 
     justifyContent: 'space-between', 
     alignItems: "center", 
-    padding: 20,
+    paddingTop: 20,
+    paddingBottom: 60,
+    paddingLeft: 20,
+    paddingRight: 20,
     position: "absolute",
     right: 0,
     left: 0,

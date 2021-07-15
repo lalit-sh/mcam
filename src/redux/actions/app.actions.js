@@ -29,6 +29,8 @@ export const syncGalleryImages = () => async dispatch => {
             for(let el of dirs){
                 let f = await fs.readDir(el.path);
                 f = f.filter(fl => fl.isFile() && fl.name.match(/.(jpg|jpeg)$/i))
+                    .sort((a, b) => new Date(b.mtime) - new Date(a.mtime))
+                console.log(f)
                 if(f && f.length > 0)
                     d[el.name] = f;
             }

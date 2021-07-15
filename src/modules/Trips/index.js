@@ -62,7 +62,7 @@ class Trips extends Component {
 
     handleTrip = trip => {
         if(trip)
-            this.props.navigation.navigate("ManageTrip", {tripId: trip._id});
+            this.props.navigation.navigate("ManageTrip", {tripId: trip._id, tripName: trip.name});
     }
 
     markSelected(trip, event){

@@ -23,5 +23,29 @@ export const AppStyle = StyleSheet.create({
     },
     highlightOnBackground: {
         backgroundColor: highlightOnColor
+    },
+    btnBig: {
+        padding: 15
+    },
+    dangerBtn: {
+        backgroundColor: "#d32f2f",
+        padding: 10
+    },
+    textCenter: {
+        textAlign: "center"
+    },
+    flexCenter: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    linkText: {
+        color: "#3895d3"
+    },
+    marginBtm10: {
+        marginBottom: 10
+    },
+    marginBtm20:{
+        marginBottom: 20
     }
 });

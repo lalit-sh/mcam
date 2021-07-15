@@ -61,7 +61,7 @@ export const getUserTrips = (token) => {
     });
 }
 
-export const deleteTrip = (trips, token) => {
+export const deleteTrip = (id, token) => {
     let url = `${API_URL}trips`;
     return axios({
         method: "DELETE",
@@ -71,7 +71,7 @@ export const deleteTrip = (trips, token) => {
             "Authorization": token
         },
         data: {
-            "trips": trips
+            "group_id": id
         }
     });
 }
@@ -102,7 +102,7 @@ export const shareNewImage = (data, token) => {
     });
 } 
 
-export const manageMembersToGroup = ({groupName, member, addMember}, token) => {
+export const manageMembersToGroup = ({groupName, member, addMember, groupId}, token) => {
     let url = `${API_URL}manageMembersToGroup`;
     return axios({
         method: "POST",
@@ -114,7 +114,8 @@ export const manageMembersToGroup = ({groupName, member, addMember}, token) => {
         data: {
             "groupName": groupName,
             "member": member,
-            "operation": addMember ? "add" : "remove"
+            "operation": addMember ? "add" : "remove",
+            "groupId": groupId
         }
     });
 }
