@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 const style = StyleSheet.create({
     logo: {
@@ -9,10 +9,6 @@ const style = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#ffc300"
-    },
-    text: {
-        fontSize: 48,
-        color: "#fff"
     }
 })
 
@@ -25,9 +21,10 @@ export default class Logo extends Component {
 
   render() {
     return (
-      <View style={style.logo}>
-        <Text style={style.text}> M </Text>
-      </View>
+        <Image 
+          style={{...style.logo, ...this.props.style}}  
+          source={require("../../assets/images/logo.png")}
+        />
     );
   }
 }

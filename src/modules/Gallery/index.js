@@ -1,6 +1,6 @@
-import { Container, Content } from 'native-base';
+import { Container } from 'native-base';
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { syncGalleryImages } from "../../redux/actions/app.actions";
@@ -10,7 +10,7 @@ import { TimelineGalleryStyle as style } from "./style";
 import ImageThumbnail from "../../shared/ImageThumb";
 import ImageSlider from "../../shared/ImageSliderModal";
 import { AppStyle } from '../../App.style';
-
+import { createNotification, displayNotification } from "../../utils/helpers/Notification.helpers";
 class Gallery extends Component {
     
     state = {
@@ -31,6 +31,13 @@ class Gallery extends Component {
             }
             i += gallery[gl].length;
         }
+
+        let noti = createNotification("test", "Test", "test");
+        noti.setData({
+            "image": "some image file"
+        })
+        displayNotification(noti);
+
         this.setState({ isImageViewOpen: true, activeImageIndex: i, activeImage: image })
     }
 
@@ -81,9 +88,11 @@ class Gallery extends Component {
         let { gallery } = this.props;
         let { isImageViewOpen, activeImageIndex } = this.state;
         return (
-            <Container style={AppStyle.container}>
+            <View style={AppStyle.container}>
                 <Header {...this.props} isBack={true} title="Gallery"/>
-                {this.getContent()}
+                <ScrollView contentContainerStyle={{paddingBottom: 30}} style={{marginBottom: 50}}>
+                    {this.getContent()}
+                </ScrollView>
                 {this.isGallery() &&
                     <ImageSlider 
                         isOpen={isImageViewOpen}
@@ -93,7 +102,7 @@ class Gallery extends Component {
                         onDelete={this.onFilesDelete}
                     />
                 }
-            </Container>
+            </View>
         )
     }
 }

@@ -1,130 +1,127 @@
-import React, { Component } from 'react';
-import { login, clearError } from "../../redux/actions/identity.action";
+import React, { Component, createRef } from 'react';
+import { View, TextInput, KeyboardAvoidingView, TouchableOpacity, Keyboard, ActivityIndicator } from "react-native";
+import { clearError } from "../../redux/actions/identity.action";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { Container, Content, Form, Item, Input, Label, Button, Text, View } from 'native-base';
+import { Container } from 'native-base';
 import Toast from 'react-native-easy-toast'
-import {
-  ActivityIndicator,
-  Keyboard
-} from 'react-native'
 import Logo from "../../shared/Logo";
 import style from "./style";
+import { AppStyle } from "../../App.style";
+import KeyboardDismissableView from '../../components/KeyboardDismissableView';
+import Text from '../../components/Text';
+import { authInit } from '../../redux/services/identity.service';
+
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      showToast: false
-    };
-  }
-
-  componentDidUpdate(prevProp, prevState, snapshot){
-    if(this.props.identity.error){
-      this.refs.toast.show(this.props.identity.error);
+    state = {
+        username: "",
+        showToast: false,
+        loading: false
     }
 
-    if(this.props.identity.isLoggedIn){
-      this.props.navigation.navigate("AuthMiddleware");
-    }
-  }
-  
-
-  handleUser = ({nativeEvent}) => {
-
-    let username = nativeEvent.text;
-
-    if(this.props.identity.error){
-      this.props.clearError();
-    }
+    _toast = createRef()
     
-    this.setState({
-      username: username
-    });
-  }
-
-  handlePassword = password => {
-    if(this.props.identity.error){
-      this.props.clearError();
-    }
-    this.setState({
-      password: password
-    });
-  }
-
-  handleSignIn = () => {
-    Keyboard.dismiss();
-    if(this.props.loading)
-      return;
-    let { username, password } = this.state;
-    username = username.trim();
-    password = password.trim();
-    let error;
-    if(username == ""){
-      error = "Username can not be blank";
-    }else if(password.trim() == ""){
-      error = "Password can not be blank";
+    handleChange = (e) => {
+        this.setState({
+            username: e
+        })
     }
 
-    if(error)
-      return this.refs.toast.show(error);
-    
-      this.props.login(username, password);
-  }
+    handleSubmit = async () => {
+        try{
+            Keyboard.dismiss();
+            if(this.state.loading)
+                return false;
+            let u = this.state.username;
+            if(!u){
+                this._toast?.current?.show("Phone number can not be blank.");
+                return;
+            }else if(u < 10){
+                this._toast?.current?.show("Phone number must be atleast 10 digit long.");
+                return;
+            }
+            this.setState({
+                loading: true
+            });
+            let resp = await authInit(this.state.username)
+            this.setState({
+                loading: false
+            })
+            console.log(resp)
+            this.props.navigation.navigate("OTPVerifyScreen", {username: this.state.username});
+        }catch(err){
+            console.log("err", err);
+            this.setState({
+                loading: false
+            })
+            this._toast?.current?.show("Unable to send OTP. Please check the number and try again.")
+        }
+    }
 
-  forgotPassword = () => {
-    return;
-  }
-
-  handleRegister = () => {
-    this.props.navigation.navigate("Register");
-  }
-
-  render() {
-    return (
-          <Container>
-            <Content contentContainerStyle={style.container} style={{padding: 15}}>
-              <Logo />
-              <Form style={style.form}>
-                <Item floatingLabel last style={{paddingBottom: 5}}>
-                  <Label style={{marginBottom: 5}}>Mobile Number</Label>
-                  <Input 
-                    keyboardType="numeric" 
-                    onChange={this.handleUser} 
-                    value={this.state.username}
-                  />
-                </Item>
-                <Item floatingLabel last style={{paddingBottom: 5}}>
-                  <Label>Password</Label>
-                  <Input onChangeText={this.handlePassword} secureTextEntry={true}/>
-                </Item>
-              </Form>
-              <Button onPress={this.handleSignIn} style={style.loginButton}>
-                {this.props.loading ? 
-                  <ActivityIndicator size="small" color="#fff" /> :
-                    <Text> Sign In </Text>
-                }
-              </Button>
-              <Button onPress={this.handleRegister} style={style.registerButton}>
-                    <Text style={style.registerButtonText}> Sign Up </Text>
-              </Button>
-            </Content>
-            <Toast ref="toast"/>
-          </Container>
-    );
-  }
+    render() {
+        return (
+            <KeyboardDismissableView>
+                <Container style={{...AppStyle.container, ...style.container}}>
+                    <KeyboardAvoidingView behavior="padding">
+                        <View style={style.logoContainer}>
+                            <Logo style={style.logo}/>
+                        </View>
+                        <View style={{...AppStyle.marginBtm20}}>
+                            <Text style={{
+                                    ...AppStyle.text, 
+                                    ...AppStyle.textCenter, 
+                                    ...AppStyle.marginBtm10,
+                                    fontSize: 16
+                                }}>
+                                Please enter your mobile number,
+                                we'll send you a 4 digit code to verify your number.
+                            </Text> 
+                        </View>
+                        <View style={style.inputContainer}>
+                            <TextInput 
+                                style={{...AppStyle.input, marginRight: 10}} 
+                                editable={false} 
+                                value="+91"
+                            />
+                            <Text style={{...AppStyle.text, marginRight: 10}}>
+                                -
+                            </Text>
+                            <TextInput 
+                                style={{...AppStyle.input, flex: 1}} 
+                                value={this.state.username}
+                                onChangeText={this.handleChange}
+                                placeholder='Phone Number'
+                                keyboardType='numeric'
+                                placeholderTextColor={'#bdbdbd'}
+                            />
+                        </View>
+                        <TouchableOpacity activeOpacity={0.6} style={{...AppStyle.warningBtn, ...AppStyle.btn}} onPress={this.handleSubmit}>
+                            {this.state.loading &&
+                                <ActivityIndicator color={"#fff"} animating={true}/>
+                            }
+                            {!this.state.loading && 
+                                <Text style={{...AppStyle.text, ...AppStyle.textCenter}}>
+                                    Next
+                                </Text>
+                            }
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
+                    <Toast ref={this._toast} style={{backgroundColor:'#444'}}/>
+                </Container>
+            </KeyboardDismissableView>
+        );
+    }
 }
 
 function mapDispathToProps(dispatch) {
-  return bindActionCreators({ login: login, clearError: clearError }, dispatch);
+    return bindActionCreators({ clearError }, dispatch);
 }
 
 //mapping reducer states to component
 const mapStateToProps = (state) => ({
-  identity: state.identity,
-  loading: state.identity ? state.identity.loading : false
+    identity: state.identity,
+    loading: state.identity ? state.identity.loading : false
 })
 
 

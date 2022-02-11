@@ -1,29 +1,40 @@
 import { StyleSheet } from "react-native"
 import { successBgColor, primaryBgColor } from "../../utils/constants/style.constants";
+
 const style = StyleSheet.create({
     container: {
+        flex: 1,
+        paddingLeft: 50,
+        paddingRight: 50,
+        paddingBottom: 50,
         justifyContent: "center",
         alignItems: "center",
-        flex: 1
     },
     logoContainer: {
-
+        display: 'flex', 
+        alignItems: 'center'
     },
-    form: {
-        width: "100%", marginBottom: 30, marginTop: 50
+    logo: {
+        marginBottom: 50, 
+        // marginTop: 50
     },
-    loginButton: {
-        width: "100%", justifyContent: "center", marginBottom: 20, marginTop: 10, backgroundColor: successBgColor
+    inputContainer: {
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        flexDirection: "row",
+        marginBottom: 30
     },
-    registerButton: {
-        width: "100%", justifyContent: "center", marginBottom: 50, marginTop: 10,
-        backgroundColor: primaryBgColor,
+    submit: {
+        // position: 'absolute',
+        // bottom:0,
+        // width: 100
     },
-    registerButtonText: {
-        color: "#fff"
-    },
-    input: {
-
+    backArrow:{
+        position: "absolute",
+        fontSize: 32,
+        left: 20,
+        top: 20
     }
 })
 

@@ -35,7 +35,7 @@ const getActiveGroup = () => {
 }
 
 
-const createNotification = (id, title, body="") => {
+export const createNotification = (id, title, body="") => {
     const notification = new firebase.notifications.Notification()
                                     .setNotificationId(id)
                                     .setTitle(title)
@@ -43,10 +43,10 @@ const createNotification = (id, title, body="") => {
     return notification;
 }
 
-const displayNotification = (notification) => {
+export const displayNotification = (notification,) => {
     notification
     .android.setChannelId(androidChannelName.id)
-    .android.setSmallIcon('ic_launcher');
+    .android.setSmallIcon('@mipmap/ic_stat_ic_notification');
     firebase.notifications().displayNotification(notification);
 }
 
@@ -54,7 +54,6 @@ export const handleNewDataMessage = async (message, gs) => {
     try{
         if(gs)
             getState = gs;
-        console.log("here", message)
         if(message){
             let data = message.data;
             let eventName = data.type;
@@ -89,8 +88,6 @@ const userAddedToGroup = async (data) => {
     try{
         const senderName = getSenderName(data);
         const updatedUserName = data.updatedUserName;
-        console.log("updatedUserName", updatedUserName)
-        console.log("getUserName()", getUserName()) 
         if(updatedUserName == getUserName()){
             const notification = createNotification("USER_ADDED_TO_GROUP", `${senderName} added you to "${data.groupName}" group`) 
             displayNotification(notification);
@@ -171,6 +168,9 @@ const newImageReceived = async (data) => {
         let key = data.imageKey;
         key = key.replace(`${S3_OBJECT_PATH}/`, "sh_");
         const fullFilePath = `${storagePath}/${key}`;
+        notification.setData({
+            "image": fullFilePath
+        })
         downloadImage(key, data.imageUri, fullFilePath, (progress) => updateProgressToNotification(notification, progress));
     }catch(err){
         console.log("An error occured in Notification.helpers.js at newImageReceived: ", err);
@@ -219,4 +219,8 @@ export const removeNotification = notification_id => {
     }catch(err){
         console.log("Error: Error at removeNotification", err);
     }
+}
+
+export const onInitialNotificationOpen = notification => {
+    console.log("notification", notification);
 }

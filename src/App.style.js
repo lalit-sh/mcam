@@ -10,7 +10,19 @@ export const AppStyle = StyleSheet.create({
         backgroundColor: bgColor
     },
     text: {
-        color: fontColor
+        color: fontColor,
+        fontFamily: "Cabin"
+    },
+    input: {
+        fontFamily: "Cabin",
+        backgroundColor: highlightColor,
+        color: fontColor,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingLeft: 12,
+        paddingRight: 12,
+        borderRadius: 5,
+        fontSize: 18
     },
     highlighted: {
         backgroundColor: highlightColor
@@ -24,15 +36,33 @@ export const AppStyle = StyleSheet.create({
     highlightOnBackground: {
         backgroundColor: highlightOnColor
     },
+    btn: {
+        padding: 10,
+        borderRadius: 5
+    },
     btnBig: {
         padding: 15
+    },
+    primaryBtn: {
+        backgroundColor: "#255ff2",
+        padding: 10
     },
     dangerBtn: {
         backgroundColor: "#d32f2f",
         padding: 10
     },
+    warningBtn: {
+        backgroundColor: "#f9c20a",
+        padding: 10
+    },
     textCenter: {
         textAlign: "center"
+    },
+    textRight: {
+        textAlign: "right"
+    },
+    textLeft: {
+        textAlign: "left"
     },
     flexCenter: {
         flex: 1,
@@ -41,6 +71,12 @@ export const AppStyle = StyleSheet.create({
     },
     linkText: {
         color: "#3895d3"
+    },
+    marginTop10: {
+        marginTop: 10
+    },
+    marginTop20: {
+        marginTop: 20
     },
     marginBtm10: {
         marginBottom: 10

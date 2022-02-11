@@ -63,14 +63,12 @@ class PushNotification {
     }
 
     async getToken() {
-        console.log("getTokenPushToken is called ghjkjhjk");
         fcmToken = await firebase.messaging().getToken();
         // if (fcmToken) {
         //     // user has a device token
         //     // await AsyncStorage.setItem('fcmToken', fcmToken);
         //     // return fcmToken;
         // }
-        console.log("fcmToken is called",fcmToken);
         if(this.onNewFcmToken)
             this.onNewFcmToken(fcmToken);
         this.createNotificationListeners();
@@ -84,14 +82,13 @@ class PushNotification {
 
         //Triggered when a particular notification has been received
         this.notificationListener = firebase.notifications().onNotification((notification) => {
-            console.log("onNotification", notification)
             if(this.onNotification){
                 this.onNotification(notification);
             }else{
                 if(Platform.OS === "android"){
                     notification
                         .android.setChannelId(channelConfig.id)
-                        .android.setSmallIcon('ic_launcher');
+                        .android.setSmallIcon('@mipmap/ic_stat_ic_notification');
                 }
 
                 firebase.notifications()
@@ -101,7 +98,6 @@ class PushNotification {
 
 
         this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
-            console.log("onNotificationDisplayed", notification)
             if(this.onNotificationDisplayed){
                 this.onNotificationDisplayed(notification);
             }
@@ -110,14 +106,13 @@ class PushNotification {
         });
         
         this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notification) => {
-            console.log("onNotificationOpened", notification)
             if(this.onNotificationOpened){
                 this.onNotificationOpened(notification);
             }else{
                 // Get the action triggered by the notification being opened
-                const action = notificationOpen.action;
+                const action = notification?.action;
                 // Get information about the notification that was opened
-                const localNotification = notificationOpen.notification;
+                const localNotification = notification?.notification;
                 firebase.notifications().removeDeliveredNotification(localNotification.notificationId);
             }
         })
@@ -126,7 +121,6 @@ class PushNotification {
         * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
         * */
         const notificationOpen = await firebase.notifications().getInitialNotification();
-        console.log("notificationOpen", notificationOpen)
         if(this.onInitialNotificationOpen){
             this.onInitialNotificationOpen(notificationOpen)            
         }else if (notificationOpen) {
@@ -143,7 +137,6 @@ class PushNotification {
         * Triggered for data only payload in foreground
         * */
         this.messageListener = firebase.messaging().onMessage((message) => {
-            console.log("onMessage", message);
             if(this.onDataMessage)    
                 this.onDataMessage(message);
         });
@@ -162,7 +155,7 @@ class PushNotification {
         if(Platform.OS === "android"){
             notification
                 .android.setChannelId(channelConfig.id)
-                .android.setSmallIcon('ic_launcher');
+                .android.setSmallIcon('@mipmap/ic_stat_ic_notification');
         }
 
         const localNotification = new firebase.notifications.Notification({

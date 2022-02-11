@@ -31,11 +31,10 @@ const authStarted = payload => ({
     payload: payload
 });
 
-export const login = (username, password) => dispatch => {
+export const authenticate = (username, password) => dispatch => {
     dispatch(authStarted());
-    service.login(username, password)
+    service.authenticate(username, password)
     .then(async resp => {
-        console.log("auth", resp)
         if(resp && resp.data && resp.data.token){
             await AsyncStorage.setItem(ACCESS_TOKEN, resp.data.token);
             dispatch(authSuccess(Object.assign({}, resp.data, {username})));
@@ -44,28 +43,8 @@ export const login = (username, password) => dispatch => {
         }
     })
     .catch(err => {
-        console.log(err);
-        let message = err.message || UNKOWN_ERROR
+        let message = err.response?.data?.message || UNKOWN_ERROR
         dispatch(authFailed(message))
-    });
-}
-
-export const signup = ({username, password, name, deviceId}) => dispatch => {
-    dispatch(authStarted());
-    service.signup({username, password, name, deviceId})
-    .then(async resp => {
-        console.log('signup resp', resp)
-        if(resp && resp.data && resp.data.token){
-            await AsyncStorage.setItem(ACCESS_TOKEN, resp.data.token);
-            dispatch(authSuccess(Object.assign({}, resp.data, {username})));
-        }else{
-            dispatch(authFailed(resp.data.message))
-        }
-    })
-    .catch(err => {
-        console.log(err)
-        let msg = err.message || UNKOWN_ERROR; 
-        dispatch(authFailed(msg));
     });
 }
 

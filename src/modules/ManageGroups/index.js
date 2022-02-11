@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { updateTrip, manageMembersToGroup, deleteGroup } from "../../redux/actions/trips.action";
-import { getUserContacts, clearError, syncUserContacts } from "../../redux/actions/users.action";
+import { clearError, syncUserContacts } from "../../redux/actions/users.action";
 import Toast from 'react-native-easy-toast'
 import { PermissionsAndroid, Platform, Alert, Linking, AppState, Share, TouchableOpacity } from 'react-native';
 import Contacts from 'react-native-contacts';
@@ -26,7 +26,6 @@ class ManageGroups extends Component {
 	}
 
 	componentDidMount = () => {
-    	// this.props.getUserContacts();
 		if(!this.props.contacts)
 			this.syncUserContacts();
 		else
@@ -329,7 +328,7 @@ class ManageGroups extends Component {
 }
 
 function mapDispathToProps(dispatch) {
-	return bindActionCreators({ updateTrip, getUserContacts, clearError, syncUserContacts, manageMembersToGroup, deleteGroup }, dispatch);
+	return bindActionCreators({ updateTrip, clearError, syncUserContacts, manageMembersToGroup, deleteGroup }, dispatch);
 }
 
   //mapping reducer states to component

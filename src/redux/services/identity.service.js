@@ -1,35 +1,17 @@
 import axios from "axios";
 import { API_URL } from "../../utils/config";
 
-export const login = (username, password) => {
-    let url = `${API_URL}auth/login`;
-    console.log("url", url)
-    return axios({
-        method: "POST",
-        url: url,
-        headers: {
-            "Content-Type": "application/json"
-        },
-        data: {
-            "username": username,
-            "password": password
-        }
+export const authInit = username => {
+    return axios.post(`${API_URL}auth/init/`, {
+        "username": username
+    }, {
+        timeout: 6000
     });
 }
 
-export const signup = ({username, password, name, deviceId}) => {
-    let url = `${API_URL}auth/signup`;
-    return axios({
-        method: "POST",
-        url: url,
-        headers: {
-            "Content-Type": "application/json"
-        },
-        data: {
-            "username": username,
-            "password": password,
-            "name": name,
-            "deviceId": deviceId
-        }
+export const authenticate = (username, otp) => {
+    return axios.post(`${API_URL}auth/login`, {
+        "username": username,
+        "password": otp
     });
 }

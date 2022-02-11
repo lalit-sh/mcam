@@ -8,14 +8,12 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from "../modules/Home";
 import AuthMiddleware from "./middleware/auth";
 import LoginScreen from "../modules/Login";
-import RegisterScreen from "../modules/Register";
 import Trips from "../modules/Trips"; // trips is used for groups page
 import ManageTrip from "../modules/ManageGroups";
 import SettingModule from "../modules/Settings";
 import CameraSetting from "../modules/Settings/modules/CameraSetting";
-// import GalleryTimelineView from '../modules/Gallery/modules/TimelineView';
-// import GalleryCollectionView from '../modules/Gallery/modules/CollectionView';
 import Gallery from "../modules/Gallery";
+import OTPVerifyScreen from '../modules/Login/OTPVerifyScreen';
 
 const headerMode = {
     headerMode: "none",
@@ -27,7 +25,7 @@ const headerMode = {
 
 const AuthStackRoutes = createStackNavigator({
     Login: LoginScreen,
-    Register: RegisterScreen
+    OTPVerifyScreen: OTPVerifyScreen
 }, headerMode);
 
 // const Gallery = createBottomTabNavigator({

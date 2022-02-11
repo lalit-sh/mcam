@@ -43,21 +43,6 @@ export const saveUserContacts = () => (dispatch, getState) => {
     
 }
 
-export const getUserContacts = () => (dispatch, getState) => {
-    dispatch(startLoading());
-    service.getUserContacts(getToken(getState))
-    .then(resp => {
-        if( resp && resp.data){
-            dispatch(success(resp.data));
-        }else if(resp.data.message){
-            dispatch(failure(resp.data.message));
-        }
-    })
-    .catch(err => {
-        dispatch(failure(UNKOWN_ERROR));
-    });
-}
-
 export const syncUserContacts = (con) => (dispatch, getState) => {
     dispatch(startLoading());
     service.syncUserContacts(Object.keys(con), getToken(getState))

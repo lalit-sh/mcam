@@ -19,7 +19,7 @@ import {
 import { 
     uploadImage,
 } from "../../utils/middleware/image";
-import { handleNewDataMessage, updateProgressToNotification, showUploadImageNotification, removeNotification } from "../../utils/helpers/Notification.helpers";
+import { handleNewDataMessage, showUploadImageNotification, removeNotification, onInitialNotificationOpen } from "../../utils/helpers/Notification.helpers";
 import Toast from 'react-native-easy-toast';
 
 
@@ -28,7 +28,8 @@ class Home extends Component {
         super(props);
         this.PushNotification = new PushNotification({
             onNewFcmToken: this.handleNewFcmToken,
-            onDataMessage: handleNewDataMessage
+            onDataMessage: handleNewDataMessage,
+            onNotificationOpened: onInitialNotificationOpen
         });
         this._toast = createRef()
     }
