@@ -1,9 +1,10 @@
 import axios from "axios";
 import { API_URL } from "../../utils/config";
 
-export const authInit = username => {
+export const authInit = (username, deviceId) => {
     return axios.post(`${API_URL}auth/init/`, {
-        "username": username
+        "username": username,
+        "deviceId": deviceId
     }, {
         timeout: 6000
     });

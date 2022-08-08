@@ -10,7 +10,7 @@ export const syncUserContacts = (con, token) => {
         data: {contacts: con},
         headers: {
             "accept": "Appication/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         }
     });
 }
@@ -24,7 +24,7 @@ export const updateFcmToken = async (token) => {
         data: {token: token},
         headers: {
             "accept": "Appication/json",
-            "Authorization": authToken
+            "Authorization": `Bearer ${authToken}`
         }
     });
 }

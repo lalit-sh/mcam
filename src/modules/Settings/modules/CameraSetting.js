@@ -39,7 +39,6 @@ class CameraSetting extends Component {
   }
 
   updateSettings = (key, value) => {
-    console.log("here", key, value);
     this.props.updateSettings(key, value)
   }
 

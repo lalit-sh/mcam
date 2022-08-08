@@ -17,7 +17,7 @@ class OTPVerifyScreen extends Component {
     state = {
         username: "",
         showToast: false,
-        timeout: 5
+        timeout: 60
     }
 
     _toast = createRef()

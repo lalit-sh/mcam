@@ -9,7 +9,7 @@ export const createTrip = (tripName, token) => {
             url: url,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": token
+                "Authorization": `Bearer ${token}`
             },
             data: {
                 "name": tripName
@@ -24,7 +24,7 @@ export const updateTrip = (tripName, data, token) => {
         url: url,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         },
         data: {
             "tripName": tripName,
@@ -40,7 +40,7 @@ export const getTrips = (tripName, token) => {
         url: url,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         },
         query: {
             "tripName": tripName,
@@ -56,7 +56,7 @@ export const getUserTrips = (token) => {
         url: url,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         }
     });
 }
@@ -68,7 +68,7 @@ export const deleteTrip = (id, token) => {
         url: url,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         },
         data: {
             "group_id": id
@@ -83,7 +83,7 @@ export const markTripActive = (trip, token) => {
         url: url,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         }
     });
 }
@@ -96,7 +96,7 @@ export const shareNewImage = (data, token) => {
         url: url,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         },
         data: data
     });
@@ -109,7 +109,7 @@ export const manageMembersToGroup = ({groupName, member, addMember, groupId}, to
         url: url,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": token
+            "Authorization": `Bearer ${token}`
         },
         data: {
             "groupName": groupName,

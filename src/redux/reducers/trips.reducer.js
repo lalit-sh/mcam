@@ -85,7 +85,6 @@ const tripsReducer = (state = initialState, action) => {
             trips = [...state.trips]
             index = trips.findIndex(el => el._id == action.payload._id);
             if(index !== -1){
-                console.log("trips[index].members", trips[index].members, action.payload.updatedMember)
                 trips[index].members = trips[index].members.filter(el => el.username !== action.payload.updatedMember);
                 trips[index].members.push({username: action.payload.updatedMember})
             }

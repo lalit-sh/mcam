@@ -11,7 +11,7 @@ import { AppStyle } from "../../App.style";
 import KeyboardDismissableView from '../../components/KeyboardDismissableView';
 import Text from '../../components/Text';
 import { authInit } from '../../redux/services/identity.service';
-
+import { getUniqueId } from 'react-native-device-info';
 
 class Login extends Component {
     state = {
@@ -44,14 +44,13 @@ class Login extends Component {
             this.setState({
                 loading: true
             });
-            let resp = await authInit(this.state.username)
+            await authInit(this.state.username, getUniqueId())
             this.setState({
                 loading: false
             })
-            console.log(resp)
             this.props.navigation.navigate("OTPVerifyScreen", {username: this.state.username});
         }catch(err){
-            console.log("err", err);
+            console.log("Error in login screen", err);
             this.setState({
                 loading: false
             })

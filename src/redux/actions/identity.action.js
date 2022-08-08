@@ -52,6 +52,6 @@ export const clearError = () => (dispatch) => {
     dispatch({type: CLEAR_ERROR})
 }
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
     dispatch({type: LOGOUT});
 }

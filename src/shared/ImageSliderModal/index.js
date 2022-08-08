@@ -221,7 +221,7 @@ class ImageSliderModal extends Component {
                 url: `file://${image.path}` 
             });
         }catch(err){
-            console.log("Image share: ", err);
+            console.log("Image share error: ", err);
         }
     }
 

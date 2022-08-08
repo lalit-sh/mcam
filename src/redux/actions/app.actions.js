@@ -1,4 +1,4 @@
-import { LATEST_IMAGE, GALLERY_IMAGE_READ } from "../../utils/constants/app.constant";
+import { LATEST_IMAGE, GALLERY_IMAGE_READ, REMOVE_GALLERY_IMAGE } from "../../utils/constants/app.constant";
 import fs from "react-native-fs";
 import { 
     getAppStoragePath,
@@ -30,7 +30,6 @@ export const syncGalleryImages = () => async dispatch => {
                 let f = await fs.readDir(el.path);
                 f = f.filter(fl => fl.isFile() && fl.name.match(/.(jpg|jpeg)$/i))
                     .sort((a, b) => new Date(b.mtime) - new Date(a.mtime))
-                console.log(f)
                 if(f && f.length > 0)
                     d[el.name] = f;
             }
@@ -40,7 +39,7 @@ export const syncGalleryImages = () => async dispatch => {
             payload: d
         })
     }catch(err){
-        console.log("Error in syncGalleryImages", err);
+        console.log("Error in syncGalleryImages in app actions", err);
         if(err.message == 'Folder does not exist')
             createAppDir()
         dispatch({
@@ -48,4 +47,11 @@ export const syncGalleryImages = () => async dispatch => {
             payload: {}
         })
     }
+}
+
+export const removeGalleryImage = (group, path) => d => {
+    d({
+        type: REMOVE_GALLERY_IMAGE,
+        payload: {group, path}
+    })
 }

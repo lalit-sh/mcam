@@ -8,7 +8,7 @@ import { Alert, StatusBar, Platform } from 'react-native';
 import PushNotification from "../../utils/PushNotification";
 import { updateFcmToken } from "../../redux/actions/users.action";
 import { shareImageWithGroup } from "../../redux/actions/trips.action";
-import { updateLatestImageTaken } from "../../redux/actions/app.actions";
+import { updateLatestImageTaken, syncGalleryImages } from "../../redux/actions/app.actions";
 import { 
     getFileName,
     getAppStoragePath,
@@ -21,7 +21,7 @@ import {
 } from "../../utils/middleware/image";
 import { handleNewDataMessage, showUploadImageNotification, removeNotification, onInitialNotificationOpen } from "../../utils/helpers/Notification.helpers";
 import Toast from 'react-native-easy-toast';
-
+import moment from "moment";
 
 class Home extends Component {
     constructor(props) {
@@ -34,10 +34,18 @@ class Home extends Component {
         this._toast = createRef()
     }
 
+    imageTaken = false
+
     componentDidMount = async () => {
         this.PushNotification.init();
         await getStoragePermission()
         this.activeTrip = await this.getActiveTrip();
+
+        let { gallery, galleryLastSyncTime } = this.props.AppData;
+        if(!gallery || (galleryLastSyncTime && moment().diff(moment(galleryLastSyncTime), 'minutes') > 30)){
+            this.props.syncGalleryImages();
+        }
+
     }
 
     handleNewFcmToken = (fcmToken) => {
@@ -99,13 +107,14 @@ class Home extends Component {
         if(!this.activeTrip){
             return this.noActiveTripDialog();
         }
+        this.imageTaken = true;
         let { username } = this.props.identity;
         const fullFilePath = this.getFilePath()
         const storagePath = getAppStoragePath(this.props.activeTrip.name)
         const filename = getFileName();
         upsertDirectory(storagePath);
         await moveFile(uri, fullFilePath);
-        this.props.updateLatestImageTaken(fullFilePath);
+        this.props.updateLatestImageTaken({group: this.props.activeTrip.name, localUri:fullFilePath});
         if(this.activeTrip.members.length > 1){
             //no need to upload file to serever if main participent is self
             let notification;
@@ -116,13 +125,13 @@ class Home extends Component {
                 "imageKey": this.getFileNameForS3Upload(filename),
                 "activeMembers": this.props.activeTrip.members.length - 1,
             }, (uploaded, err) => {
-                if(Platform.OS == 'ios'){
+                // if(Platform.OS == 'ios'){
                     if(!notification && !err){
                         notification = showUploadImageNotification(this.props.activeTrip)
                     }else if((err || uploaded == 100) && notification){
                         removeNotification(notification.notificationId)
                     }
-                }
+                // }
                 if(err && this._toast && this._toast.current)
                     this._toast.current.show(`Unable to upload image`);
             });
@@ -138,7 +147,8 @@ class Home extends Component {
                     navigation={this.props.navigation}
                     activeTrip={this.activeTrip}
                     settings={this.props.settings}
-                    lastImageTaken={this.props.AppData && this.props.AppData.latestImage}
+                    lastImageTaken={this.props.AppData.latestImage}
+                    imageTaken={this.imageTaken}
                 />
                 <Toast ref={this._toast}/>
             </Container>
@@ -147,7 +157,7 @@ class Home extends Component {
 }
 
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({ updateFcmToken, shareImageWithGroup, updateLatestImageTaken }, dispatch);
+    return bindActionCreators({ updateFcmToken, shareImageWithGroup, updateLatestImageTaken, syncGalleryImages   }, dispatch);
 }
 
 const mapStateToProps = (state) => ({

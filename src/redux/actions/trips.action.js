@@ -10,7 +10,6 @@ import {
 } from "../../utils/constants/error.constants";
 import * as service from "../services/trips.services";
 import { getToken } from "../../utils/helpers/getStateHelpers";
-import AsyncStorage from '@react-native-community/async-storage';
 
 const started = payload => ({
     type: PROCESS_TRIP_STARTED
@@ -64,7 +63,6 @@ export const updateTrip = (tripName, data) => (dispatch, getState) => {
     dispatch(started());
     service.updateTrip(tripName, data, getToken(getState))
     .then(resp => {
-        console.log("updateTrip resp", resp);
         if(resp && resp.data){
             getTrips()(dispatch, getState);;
         }else{
@@ -80,7 +78,6 @@ export const manageMembersToGroup = ({groupId, groupName, member, addMember}) =>
     dispatch(started());
     service.manageMembersToGroup({groupName, member, addMember, groupId}, getToken(getState))
     .then(resp => {
-        console.log("updateTrip resp", resp);
         if(resp && resp.data){
             getTrips()(dispatch, getState);;
         }else{
@@ -88,7 +85,7 @@ export const manageMembersToGroup = ({groupId, groupName, member, addMember}) =>
         }
     })
     .catch(err => {
-        console.log('err', err, err.response)
+        console.log('Error in manageMembersToGroup', err, err.response)
         dispatch(failure("Something went wrong"));
     })
 }
@@ -98,14 +95,13 @@ export const getTrips = (tripName = null) => (dispatch, getState) => {
     service.getUserTrips(getToken(getState))
     .then(resp => {
         if(resp && resp.data){
-            console.log("resp.data",resp.data);
             dispatch(success(resp.data));
         }else{
             dispatch(failure(resp.data.message));
         }
     })
     .catch(err => {
-        console.log("error", err);
+        console.log("error getTrips", err);
         dispatch(failure("Something went wrong"));
     })
 };
@@ -133,10 +129,10 @@ export const markTripActive = (trip) => (dispatch, getState) => {
 export const shareImageWithGroup = (data) => (dispatch, getState) => {
     service.shareNewImage(data, getToken(getState))
     .then(resp => {
-        console.log("resp", resp);
+        console.log("Image shared with group", resp);
     })
     .catch(err => {
-        console.log("err", err);
+        console.log("error in shareImageWithGroup", err);
     })
 } 
 

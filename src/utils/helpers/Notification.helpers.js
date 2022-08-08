@@ -46,7 +46,8 @@ export const createNotification = (id, title, body="") => {
 export const displayNotification = (notification,) => {
     notification
     .android.setChannelId(androidChannelName.id)
-    .android.setSmallIcon('@mipmap/ic_stat_ic_notification');
+    .android.setSmallIcon('@mipmap/ic_stat_ic_notification')
+    .android.setColor("red")
     firebase.notifications().displayNotification(notification);
 }
 

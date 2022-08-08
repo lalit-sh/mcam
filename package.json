@@ -19,6 +19,7 @@
     "native-base": "^2.13.12",
     "react": "17.0.1",
     "react-native": "0.63.4",
+    "react-native-app-intro-slider-custom": "^1.0.0",
     "react-native-background-downloader": "^2.3.4",
     "react-native-background-upload": "^6.2.4",
     "react-native-camera": "^3.44.0",

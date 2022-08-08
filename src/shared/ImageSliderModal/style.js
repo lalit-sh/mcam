@@ -28,11 +28,12 @@ export const style = StyleSheet.create({
         padding: 20,
     },
     footerIcon: {
-        fontSize: 26
+        fontSize: 22,
+        marginBottom: 5
     },
     footerText: {
         color: "#fff",
-        fontSize: 14
+        fontSize: 12
     },
     animatedFoter: {
         position: "absolute",

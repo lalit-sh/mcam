@@ -21,7 +21,7 @@ export const uploadImage = async (options, onProgress) => {
                 imageKey: imageKey
             },
             headers:{
-                Authorization: token
+                Authorization: `Bearer ${token}`
             },
             notification:{
                 enabled: true, 
@@ -32,7 +32,6 @@ export const uploadImage = async (options, onProgress) => {
         };
 
         RNBackgroundUploader.startUpload(params).then((uploadId) => {
-            console.log('Upload started')
             RNBackgroundUploader.addListener('progress', uploadId, (data) => {
                 onProgress && onProgress(data.progress)
             });
@@ -63,13 +62,13 @@ export const downloadImage = async (key, url, destination, onProgress) => {
             destination: destination
         }).begin((expectedBytes) => {
             onProgress && onProgress(0)
-            console.log(`Going to download ${expectedBytes} bytes!`);
+            // console.log(`Going to download ${expectedBytes} bytes!`);
         }).progress((percent) => {
             onProgress && onProgress(percent * 100)
-            console.log(`Downloaded: ${percent * 100}%`);
+            // console.log(`Downloaded: ${percent * 100}%`);
         }).done(() => {
             onProgress && onProgress(100)
-            console.log('Download is done!');
+            // console.log('Download is done!');
         }).error((error) => {
             console.log('Download canceled due to error: ', error);
         });

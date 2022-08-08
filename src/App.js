@@ -8,18 +8,46 @@ import { MenuProvider } from 'react-native-popup-menu';
 import SplashScreen from  "react-native-splash-screen";
 import { firebaseBackgroundMessage } from "./utils/BackgroundFBMessage";
 import { AppRegistry } from "react-native"; 
+import IntroScreen from './modules/IntoScreen';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { store, persistor } = Store();
 
 class App extends Component {
   constructor(props) {
       super(props);
+      this.state = {
+        isIntroDone: false,
+        isMounted: false
+      }
   }
-  componentDidMount() {
+
+  componentDidUpdate(prevProps, prevState) { 
+    if(this.state.isMounted && !prevState.isMounted){
       SplashScreen.hide();
+    }
+  }
+
+  
+  async componentDidMount() {
+      let isIntroDone = await AsyncStorage.getItem("isIntroDone") == "true";
+      this.setState({
+        isIntroDone,
+        isMounted: true
+      });
+  }
+
+  handleIntroDone = async () => {
+    await AsyncStorage.setItem("isIntroDone", "true");
+    this.setState({isIntroDone: true});
   }
 
   render() {
+    
+    if(!this.state.isIntroDone &&  this.state.isMounted){
+      return <IntroScreen onDone={this.handleIntroDone}/>
+    }
+
     return (
       <MenuProvider backHandler={true}>
         <Provider store={store}>

@@ -15,7 +15,6 @@ const Picker = props => {
 
         return placeholder || items[0].label;
     }
-    console.log("value", value);
     return  <>
                 <TouchableOpacity onPress={() => toggleModal(!isOpen)}>
                     <Text style={[sty.valueLabel, style && style.text]}>{getValueLabel()}</Text>

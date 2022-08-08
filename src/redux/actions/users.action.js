@@ -2,16 +2,22 @@
 
 import * as service from "../services/users.service";
 import { getToken } from "../../utils/helpers/getStateHelpers";
-import { START_LOADING, STOP_LOADING } from "../../utils/constants/common.constants";
+// import { START_LOADING, STOP_LOADING } from "../../utils/constants/common.constants";
 import { UNKOWN_ERROR, CLEAR_ERROR } from "../../utils/constants/error.constants";
-import { GET_USER_CONTACT_SUCCESS, GET_USER_CONTACT_FAILURE, SYNC_USER_CONTACTS } from "../../utils/constants/user.constants";
+import { 
+    GET_USER_CONTACT_SUCCESS, 
+    GET_USER_CONTACT_FAILURE, 
+    SYNC_USER_CONTACTS, 
+    USER_START_LOADING,
+    USER_STOP_LOADING
+} from "../../utils/constants/user.constants";
 
 const startLoading = payload => ({
-    type: START_LOADING
+    type: USER_START_LOADING
 });
 
 const stopLoading = payload => ({
-    type: STOP_LOADING
+    type: USER_STOP_LOADING
 });
 
 const success = payload => ({
@@ -48,7 +54,6 @@ export const syncUserContacts = (con) => (dispatch, getState) => {
     service.syncUserContacts(Object.keys(con), getToken(getState))
     .then(resp => {
         if( resp && resp.data){
-            console.log(resp.data, con)
             let d = {};
 
             resp.data.map(el => {
@@ -64,7 +69,7 @@ export const syncUserContacts = (con) => (dispatch, getState) => {
         }
     })
     .catch(err => {
-        console.log(err);
+        console.log("Error while syncing user contacts in user action syncUserContacts",err);
         dispatch(failure(UNKOWN_ERROR));
     });
 }
@@ -73,7 +78,6 @@ export const updateFcmToken = (fcmToken) => (dispatch) => {
     // dispatch(startLoading());
     service.updateFcmToken(fcmToken)
     .then(resp => {
-        console.log(resp);
         // if(resp){
         //     console.log("success", resp);
         // }else{
@@ -81,7 +85,7 @@ export const updateFcmToken = (fcmToken) => (dispatch) => {
         // }
     })
     .catch(err => {
-        console.log(err);
+        console.log("Error while updating FCM token",err);
     })
 }
 

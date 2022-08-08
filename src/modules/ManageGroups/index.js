@@ -103,7 +103,7 @@ class ManageGroups extends Component {
 				})
 			}
 		}catch(err){
-			console.log(err);
+			console.log("Error in syncCotact in Manage Groups",err);
 		}
 	}
 
@@ -176,7 +176,7 @@ class ManageGroups extends Component {
 				// dismissed
 			}
 		} catch (error) {
-			console.log(error.message)
+			console.log("Error in invite user",error.message)
 		}
 	}
 

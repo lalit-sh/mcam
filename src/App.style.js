@@ -9,6 +9,9 @@ export const AppStyle = StyleSheet.create({
     container: {
         backgroundColor: bgColor
     },
+    flex: {
+        flex: 1
+    },
     text: {
         color: fontColor,
         fontFamily: "Cabin"

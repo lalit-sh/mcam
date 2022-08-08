@@ -1,7 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 let dw = Dimensions.get("screen").width;
-console.log(dw)
 let cw = dw - 15;
 export const TimelineGalleryStyle = StyleSheet.create({
     gpContainer: {

@@ -73,8 +73,6 @@ export const stripFilePathPrefix = (pathStr) => {
 
 export const moveFile = async (frompPath, toPath) => {
     try{
-        console.log("fromPath", frompPath)
-        console.log("toPath", toPath);
         return await RNFS.moveFile(stripFilePathPrefix(frompPath), toPath);
     }catch(err){
         console.log(`Error while moving the file from ${frompPath} to ${toPath}`, err);

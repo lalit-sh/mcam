@@ -158,7 +158,7 @@ class Camera extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.lastImageTaken && prevProps.lastImageTaken !== this.props.lastImageTaken){
+        if(this.props.imageTaken && this.props.lastImageTaken && prevProps.lastImageTaken !== this.props.lastImageTaken){
             this.setPreview(this.props.lastImageTaken);
         }
     }
